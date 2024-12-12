@@ -1,0 +1,23 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+}
+
+#container {
+    height: 100%;
+    width: 100%;
+}
+
+canvas:focus {
+    outline: none;
+}
+
+#progress {
+    position: absolute;
+    top: 0;
+    margin: 6px;
+    color: grey;
+    font-family: 'Courier New', Courier, monospace;
+    z-index: 2000;
+}
