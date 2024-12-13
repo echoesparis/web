@@ -12,9 +12,10 @@
   <script type="module">
     import { UnrealBloomPass } from '//unpkg.com/three/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-    const Graph = ForceGraph3D()
-      (document.getElementById('3d-graph'))
-        .backgroundColor('rgba(0,0,0,0)')
+    const Graph = ForceGraph3D({
+      extraRendererConfig: { alpha: true }
+    })(document.getElementById('3d-graph'))
+        .backgroundColor('#00000000')
         .jsonUrl('../datasets/miserables.json')
         .nodeLabel('id')
         .nodeAutoColorBy('group');
