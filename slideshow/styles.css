@@ -96,9 +96,7 @@ video::-webkit-media-controls-play-button {
 /* Update caption styles */
 .slide-caption {
     position: absolute;
-    bottom: -30px;
-    left: 0;
-    right: 0;
+    bottom: -35px;
     text-align: center;
     color: #666;
     font-size: 14px;
@@ -107,6 +105,31 @@ video::-webkit-media-controls-play-button {
     overflow: hidden;
     text-overflow: ellipsis;
     padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.caption-text {
+    display: inline-block;
+}
+
+.tag-link {
+    display: inline-block;
+}
+
+.tag-link a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: none;
+    transition: all 0.2s ease;
+}
+
+.tag-link a:hover {
+    opacity: 0.6;
+    text-decoration: none;
+    border-bottom: none;
 }
 
 /* Update link styles */
@@ -120,7 +143,6 @@ video::-webkit-media-controls-play-button {
     cursor: pointer;
 }
 
-/* Remove caption link styles */
 /* Add styles for clickable captions */
 .slide-caption a {
     color: inherit;
@@ -130,11 +152,15 @@ video::-webkit-media-controls-play-button {
     padding-bottom: 2px;
     transition: all 0.2s ease;
     max-width: 100%;
+    text-decoration: none;
+    border-bottom: none;
 }
 
 .slide-caption a:hover {
     color: inherit;
     border-bottom-color: inherit;
+    text-decoration: none;
+    border-bottom: none;
 }
 
 /* Remove previous link styles */
@@ -221,4 +247,9 @@ video::-webkit-media-controls-play-button {
 .swiper-slide a:hover::after {
     opacity: 1;
     background: #ffffb3ba;
+}
+
+/* Add this new rule to hide the arrow on caption links */
+.slide-caption a::after {
+    display: none;  /* This will hide the arrow on caption links */
 }
