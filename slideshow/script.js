@@ -69,7 +69,6 @@ function getMediaType(src) {
 
 // Function to create slide HTML based on media type
 function createSlideElement(media) {
-    const caption = media.source === 'notion' ? media.caption : getFileName(media.src);
     const type = getMediaType(media.src);
     
     const mediaElement = type === 'image' 
@@ -88,12 +87,33 @@ function createSlideElement(media) {
     
     // Wrap media in link if it's a notion file
     const content = media.source === 'notion' && media.notionUrl
-        ? `<a href="${media.notionUrl}" >${mediaElement}</a>`
+        ? `<a href="${media.notionUrl}">${mediaElement}</a>`
         : mediaElement;
+
+    // Create tags HTML if tags exist
+    const tagsHtml = media.tags ? media.tags.map(tag => {
+        // Extract text in parentheses or use full tag
+        const displayText = tag.match(/\((.*?)\)/) 
+            ? tag.match(/\((.*?)\)/)[1]  // Get text between parentheses
+            : tag;
+
+        // Convert full tag to URL-friendly format
+        const tagUrl = tag.toLowerCase()
+            .replace(/\s+/g, '-')  // Replace spaces with hyphens
+            .replace(/[()]/g, '');  // Remove parentheses
+
+        return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}">#${displayText}</a></span>`;
+    }).join(' ') : '';
+
+    // Get caption text, fallback to filename if no caption
+    const captionText = media.caption || getFileName(media.src);
 
     return `
         ${content}
-        <div class="slide-caption">${caption}</div>
+        <div class="slide-caption">
+            <span class="caption-text">${captionText}</span>
+            ${tagsHtml}
+        </div>
     `;
 }
 
