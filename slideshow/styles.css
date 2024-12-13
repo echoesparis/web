@@ -14,31 +14,26 @@
 }
 
 .swiper-slide {
-    height: 500px;
-    width: auto;
-    max-width: 80%;
+    
+    
+    max-width: 90%;
     background: #00000000;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.1s;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+ 
 }
 
-.swiper-slide img {
-    height: 100%;
-    max-height: 500px;
-    width: 100%;
-    object-fit: contain;
-    border-radius: 8px;
-}
-
+.swiper-slide img,
 .swiper-slide video {
     height: 100%;
     max-height: 500px;
-    width: 100%;
-    object-fit: contain;
+    display: block;
+    margin: 0 auto;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 /* Navigation button styles */
@@ -193,13 +188,16 @@ video::-webkit-media-controls-play-button {
 }
 
 /* Add hover effect for clickable images */
-.swiper-slide a img {
+.swiper-slide a img,
+.swiper-slide a video {
     transition: all 0.3s ease;
 }
 
-.swiper-slide a:hover img {
+.swiper-slide a:hover img,
+.swiper-slide a:hover video {
     transform: scale(1.02); /* Subtle zoom on hover */
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); /* Subtle glow effect */
+    /* Combine both shadows */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 50px #ffffb3ba; /* Base shadow + glow effect */
 }
 
 /* Add a small icon to indicate clickable images */
@@ -212,7 +210,7 @@ video::-webkit-media-controls-play-button {
     position: absolute;
     top: 10px;
     right: 10px;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(255, 255, 255);
     padding: 5px 8px;
     border-radius: 4px;
     font-size: 14px;
@@ -222,4 +220,5 @@ video::-webkit-media-controls-play-button {
 
 .swiper-slide a:hover::after {
     opacity: 1;
+    background: #ffffb3ba;  /* Using the same color as the glow effect */
 }
