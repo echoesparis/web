@@ -197,7 +197,7 @@ video::-webkit-media-controls-play-button {
 .swiper-slide a:hover video {
     transform: scale(1.02); /* Subtle zoom on hover */
     /* Combine both shadows */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 50px #ffffb3ba; /* Base shadow + glow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px #ffffb350; /* Base shadow + glow effect */
 }
 
 /* Add a small icon to indicate clickable images */
