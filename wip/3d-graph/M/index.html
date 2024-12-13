@@ -14,10 +14,12 @@
 
     const Graph = ForceGraph3D()
       (document.getElementById('3d-graph'))
-        .backgroundColor('#000000')
+        .backgroundColor('rgba(0,0,0,0)')
         .jsonUrl('../datasets/blocks.json')
         .nodeLabel('description')
         .nodeAutoColorBy('user');
+
+    Graph.renderer().setClearAlpha(0);
 
     const bloomPass = new UnrealBloomPass();
     bloomPass.strength = 5;
