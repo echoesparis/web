@@ -88,7 +88,7 @@ function createSlideElement(media) {
     
     // Wrap media in link if it's a notion file
     const content = media.source === 'notion' && media.notionUrl
-        ? `<a href="${media.notionUrl}" target="_blank">${mediaElement}</a>`
+        ? `<a href="${media.notionUrl}" >${mediaElement}</a>`
         : mediaElement;
 
     return `
