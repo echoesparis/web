@@ -84,7 +84,7 @@
 /* Adjust adjacent slides */
 .swiper-slide-prev,
 .swiper-slide-next {
-    transform: scale(0.7);
+    transform: scale(0.9);
     opacity: 0.2;
 }
 
