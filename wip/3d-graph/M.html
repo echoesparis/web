@@ -1,8 +1,11 @@
 <head>
-  <style> body { margin: 0; } </style>
-
-  <script src="./lib/3d-force-graph.min.js""></script>
-<!--  <script src="../../dist/3d-force-graph.js"></script>-->
+  <style>
+    body {
+      margin: 0;
+      background: transparent;
+    }
+  </style>
+  <script src="./lib/3d-force-graph.min.js"></script>
 </head>
 
 <body>
@@ -18,15 +21,27 @@
     import * as THREE from 'three';
     import { UnrealBloomPass } from './lib/examples/jsm/postprocessing/UnrealBloomPass.js';
 
-    const Graph = ForceGraph3D()
-      (document.getElementById('3d-graph'))
-      .backgroundColor('#00000000')
-        .jsonUrl('./datasets/blocks.json')
-        .nodeLabel('description')
-        .nodeAutoColorBy('user');
+    // Create scene with alpha
+    const Graph = ForceGraph3D({
+      extraRendererConfig: {
+        alpha: true,
+        antialias: true
+      }
+    })(document.getElementById('3d-graph'));
 
-    Graph.renderer().setClearAlpha(0);
+    // Configure graph
+    Graph
+      .backgroundColor('rgba(0,0,0,0)')
+      .jsonUrl('./datasets/blocks.json')
+      .nodeLabel('description')
+      .nodeAutoColorBy('user');
 
+    // Configure renderer
+    const renderer = Graph.renderer();
+    renderer.setClearColor(0x000000, 0);
+    renderer.setClearAlpha(0);
+
+    // Configure bloom
     const bloomPass = new UnrealBloomPass();
     bloomPass.strength = 5;
     bloomPass.radius = 1;
