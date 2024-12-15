@@ -1,141 +1,87 @@
-// Function to get all media files from both JSON files
 async function getMediaFiles() {
     try {
-        // Load both JSON files
-        const [mediaResponse, notionResponse] = await Promise.all([
-            fetch('media.json').catch(() => ({ ok: false, status: 404 })),
-            fetch('notion.json')
-        ]);
+        console.log('Starting getMediaFiles...');
+        const response = await fetch('media.json');
+        const mediaFiles = await response.json();
+        console.log(`Loaded ${mediaFiles.length} files from media.json`);
 
-        if (!notionResponse.ok) {
-            throw new Error('Failed to load notion files');
-        }
+        // Process files to add source path
+        const processedFiles = mediaFiles.map(file => ({
+            ...file,
+            src: `src/${file.src}` // Prepend the src/ folder path
+        }));
 
-        const notionFiles = await notionResponse.json();
-        let mediaFiles = [];
-
-        // Only try to load media.json if it exists
-        if (mediaResponse.ok) {
-            mediaFiles = await mediaResponse.json();
-        } else {
-            console.log('media.json is missing');
-        }
-
-        // Combine both arrays
-        const combinedFiles = [
-            ...notionFiles.map(file => ({
-                ...file,
-                source: 'notion',
-                notionUrl: file.url
-            })),
-            ...mediaFiles.map(file => ({
-                ...file,
-                source: 'local'
-            }))
-        ];
-
-        return combinedFiles;
+        return processedFiles;
     } catch (error) {
         console.error('Error loading media files:', error);
         return [];
     }
 }
 
-// Function to get filename from path without extension
+// Helper functions from previous version
 function getFileName(path) {
-    // Check if it's a Notion URL
     if (path.includes('notion.so')) {
-        // Extract the downloadName parameter
         const downloadName = new URLSearchParams(path.split('?')[1]).get('downloadName');
         if (downloadName) {
-            // Remove extension and replace dashes/underscores with spaces, then trim
             return downloadName
-                .replace(/\.[^/.]+$/, '') // remove extension
-                .replace(/[-_]/g, ' ') // replace dashes and underscores with spaces
-                .replace(/\b\w/g, c => c.toUpperCase()) // capitalize first letter of each word
-                .trim(); // remove leading and trailing spaces
+                .replace(/\.[^/.]+$/, '')
+                .replace(/[-_]/g, ' ')
+                .replace(/\b\w/g, c => c.toUpperCase())
+                .trim();
         }
     }
-    // For local files
     return path.split('/').pop().replace(/\.[^/.]+$/, '').trim();
 }
 
-// Function to determine media type from source URL
 function getMediaType(src) {
-    const videoExtensions = ['.mp4', '.webm', '.ogg'];
-    const extension = src.toLowerCase().match(/\.[^/.]+$/)?.[0];
-    return videoExtensions.includes(extension) ? 'video' : 'image';
+    const ext = src.split('.').pop().toLowerCase();
+    return ext === 'mp4' ? 'video' : 'image';
 }
 
-// Function to create slide HTML based on media type
-function createSlideElement(media) {
-    const type = getMediaType(media.src);
-    
-    const mediaElement = type === 'image' 
-        ? `<img src="${media.src}" alt="Slide Image">`
-        : `
-            <video 
-                controls
-                preload="metadata"
-                playsinline
-                loop
-            >
-                <source src="${media.src}" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+async function createSlideElement(media) {
+    try {
+        const isVideo = getMediaType(media.src);
+        
+        // Create media element based on type
+        const mediaElement = isVideo === 'video'
+            ? `<video controls playsinline loop preload="metadata">
+                 <source src="${media.src}" type="video/mp4">
+                 Your browser does not support the video tag.
+               </video>`
+            : `<img src="${media.src}" alt="${media.caption || ''}" loading="lazy">`;
+
+        // Wrap in link if URL is provided
+        const content = media.url
+            ? `<a href="${media.url}" target="_blank">${mediaElement}</a>`
+            : mediaElement;
+
+        // Generate tags HTML if present
+        const tagsHtml = media.tags ? media.tags.map(tag => {
+            const displayText = tag.match(/\((.*?)\)/) 
+                ? tag.match(/\((.*?)\)/)[1]
+                : tag;
+            const tagUrl = tag.toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[()]/g, '');
+            return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}">#${displayText}</a></span>`;
+        }).join(' ') : '';
+
+        return `
+            ${content}
+            <div class="slide-caption">
+                <span class="caption-text">${media.caption || ''}</span>
+                ${tagsHtml}
+            </div>
         `;
-    
-    // Wrap media in link if it's a notion file
-    const content = media.source === 'notion' && media.notionUrl
-        ? `<a href="${media.notionUrl}">${mediaElement}</a>`
-        : mediaElement;
-
-    // Create tags HTML if tags exist
-    const tagsHtml = media.tags ? media.tags.map(tag => {
-        // Extract text in parentheses or use full tag
-        const displayText = tag.match(/\((.*?)\)/) 
-            ? tag.match(/\((.*?)\)/)[1]  // Get text between parentheses
-            : tag;
-
-        // Convert full tag to URL-friendly format
-        const tagUrl = tag.toLowerCase()
-            .replace(/\s+/g, '-')  // Replace spaces with hyphens
-            .replace(/[()]/g, '');  // Remove parentheses
-
-        return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}">#${displayText}</a></span>`;
-    }).join(' ') : '';
-
-    // Get caption text, fallback to filename if no caption
-    const captionText = media.caption || getFileName(media.src);
-
-    return `
-        ${content}
-        <div class="slide-caption">
-            <span class="caption-text">${captionText}</span>
-            ${tagsHtml}
-        </div>
-    `;
-}
-
-// Preload images function
-async function preloadImage(src) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = () => reject(new Error(`Failed to load image: ${src}`));
-        img.src = src;
-    });
-}
-
-// Preload video metadata
-async function preloadVideo(src) {
-    return new Promise((resolve, reject) => {
-        const video = document.createElement('video');
-        video.preload = 'metadata';
-        video.onloadedmetadata = () => resolve(video);
-        video.onerror = () => reject(new Error(`Failed to load video: ${src}`));
-        video.src = src;
-    });
+    } catch (error) {
+        console.error('Error creating slide:', error);
+        return `
+            <div class="error-message">
+                Failed to load media<br>
+                <small>${media.caption || 'Untitled'}</small>
+            </div>
+        `;
+    }
 }
 
 // Initialize Swiper
@@ -143,35 +89,22 @@ async function initSwiper() {
     const loader = document.querySelector('.loader');
     
     try {
-        // Load media files data
         const mediaFiles = await getMediaFiles();
-        
-        // Preload first few items (e.g., first 5)
-        const preloadCount = 5;
-        const preloadPromises = mediaFiles
-            .slice(0, preloadCount)
-            .map(media => 
-                getMediaType(media.src) === 'image'
-                    ? preloadImage(media.src)
-                    : preloadVideo(media.src)
-            );
-
-        // Wait for initial items to load
-        await Promise.all(preloadPromises);
-        
         const swiperWrapper = document.querySelector('.swiper-wrapper');
 
-        // Create slides
-        mediaFiles.forEach(media => {
-            const slide = document.createElement('div');
-            slide.className = 'swiper-slide';
-            slide.innerHTML = createSlideElement(media);
-            swiperWrapper.appendChild(slide);
-        });
+        // Create and append first slide
+        if (mediaFiles.length > 0) {
+            const firstSlide = document.createElement('div');
+            firstSlide.className = 'swiper-slide';
+            firstSlide.innerHTML = await createSlideElement(mediaFiles[0]);
+            swiperWrapper.appendChild(firstSlide);
+            
+            // Hide loader as soon as first slide is created
+            loader.classList.add('hidden');
+        }
 
-        // Initialize Swiper
-        const swiper = new Swiper('.mySwiper', {
-            // Carousel effect settings
+        // Initialize Swiper immediately with first slide
+        const swiper = new Swiper('.swiper', {
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
@@ -184,118 +117,108 @@ async function initSwiper() {
                 modifier: 1,
                 slideShadows: true,
             },
-            
-            // Auto play with custom delay
             autoplay: {
                 delay: 3000,
                 disableOnInteraction: false,
             },
-            
-            // Smooth transition
             speed: 1000,
-            
-            // Loop
             loop: true,
-            
-            // Pagination
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
+                dynamicBullets: true,
+                renderBullet: function (index, className) {
+                    return '<span class="' + className + '"></span>';
+                }
             },
-            
-            // Navigation arrows
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
+            keyboard: { enabled: true },
+            on: {
+                slideChange: function() {
+                    // Only process videos if there are slides
+                    if (this.slides && this.slides.length > 0) {
+                        // Pause all videos
+                        const videos = document.querySelectorAll('video');
+                        videos.forEach(video => {
+                            video.pause();
+                            video.currentTime = 0;
+                        });
+
+                        // Get the next slide if it exists
+                        const nextSlide = this.slides[this.activeIndex];
+                        if (nextSlide) {
+                            // Set autoplay delay based on content type
+                            this.params.autoplay.delay = nextSlide.querySelector('video') ? 7000 : 3000;
+                        }
+                    }
+                },
+                slideChangeTransitionEnd: function() {
+                    // Only try to play video if there are slides
+                    if (this.slides && this.slides.length > 0) {
+                        const activeSlide = this.slides[this.activeIndex];
+                        if (activeSlide) {
+                            const video = activeSlide.querySelector('video');
+                            if (video) {
+                                video.play().catch(err => {
+                                    console.warn('Video playback failed:', err);
+                                });
+                            }
+                        }
+                    }
+                },
+                resize: function () {
+                    this.update(); // Update Swiper on window resize
+                },
+                beforeResize: function () {
+                    // Recalculate sizes before resize
+                    this.updateSize();
+                    this.updateSlides();
+                }
             },
-            
-            // Responsive breakpoints
+            centeredSlides: true,
             breakpoints: {
                 320: {
                     slidesPerView: 1,
-                },
-                640: {
-                    slidesPerView: 1.3,
-                },
-                968: {
-                    slidesPerView: 2.2,
-                }
-            },
-            
-            // Improve performance
-            preloadImages: false,
-            lazy: {
-                loadPrevNext: true,
-                loadPrevNextAmount: 2
-            },
-            watchSlidesProgress: true,
-            
-            // Add keyboard control
-            keyboard: {
-                enabled: true,
-                onlyInViewport: false,
-            },
-            
-            on: {
-                slideChange: function () {
-                    // Pause all videos when sliding
-                    const videos = document.querySelectorAll('video');
-                    videos.forEach(video => {
-                        video.pause();
-                        video.currentTime = 0;
-                    });
-
-                    // Set delay based on next slide type
-                    const nextSlide = this.slides[this.activeIndex];
-                    const video = nextSlide.querySelector('video');
-                    if (video) {
-                        this.params.autoplay.delay = 8000; // Longer delay for videos (8 seconds)
-                    } else {
-                        this.params.autoplay.delay = 3000; // Normal delay for images (3 seconds)
+                    coverflowEffect: {
+                        rotate: 30,
+                        depth: 50
                     }
                 },
-                slideChangeTransitionEnd: function () {
-                    // Auto-play the current slide's video if it exists
-                    const activeSlide = this.slides[this.activeIndex];
-                    const video = activeSlide.querySelector('video');
-                    if (video) {
-                        video.play().catch(function(error) {
-                            console.log("Video play failed:", error);
-                        });
+                480: {
+                    slidesPerView: 'auto',
+                    coverflowEffect: {
+                        rotate: 40,
+                        depth: 75
                     }
                 },
-                init: function() {
-                    // Hide loader when Swiper is ready
-                    loader.classList.add('hidden');
+                768: {
+                    slidesPerView: 'auto',
+                    coverflowEffect: {
+                        rotate: 50,
+                        depth: 100
+                    }
                 }
             }
         });
 
-        // Add custom keyboard event listener for more control
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                swiper.slidePrev();
-            } else if (e.key === 'ArrowRight') {
-                swiper.slideNext();
-            }
-        });
-
-        // Preload remaining items in background
-        mediaFiles
-            .slice(preloadCount)
-            .forEach(media => 
-                getMediaType(media.src) === 'image'
-                    ? preloadImage(media.src).catch(console.error)
-                    : preloadVideo(media.src).catch(console.error)
-            );
+        // Load remaining slides in the background
+        for (let i = 1; i < mediaFiles.length; i++) {
+            const slide = document.createElement('div');
+            slide.className = 'swiper-slide';
+            slide.innerHTML = await createSlideElement(mediaFiles[i]);
+            swiperWrapper.appendChild(slide);
+            swiper.update(); // Update swiper after each slide is added
+        }
 
     } catch (error) {
         console.error('Failed to initialize gallery:', error);
-        loader.innerHTML = `
-            <div class="loader-text">Failed to load gallery. Please try again.</div>
-        `;
+        loader.innerHTML = '<div class="loader-text">Failed to load gallery. Please try again.</div>';
     }
 }
 
-// Initialize when the document is loaded
-document.addEventListener('DOMContentLoaded', initSwiper); 
+// Initialize when the page loads
+document.addEventListener('DOMContentLoaded', initSwiper);
+
+// Add window resize listener
+window.addEventListener('resize', () => {
+    swiper.update();
+});
