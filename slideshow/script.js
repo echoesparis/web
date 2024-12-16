@@ -48,7 +48,7 @@ async function createSlideElement(media) {
         
         // Create media element based on type - remove lazy loading for videos
         const mediaElement = isVideo === 'video'
-            ? `<video controls playsinline loop muted autoplay preload="auto">
+            ? `<video controls playsinline muted autoplay preload="auto">
                  <source src="${media.src}" type="video/mp4">
                  Your browser does not support the video tag.
                </video>`
@@ -304,14 +304,20 @@ async function initSwiper() {
                             video.currentTime = 0;
                             video.muted = true;
                             video.playbackRate = 1.0;
+                            video.loop = false; // Ensure video doesn't loop
 
                             // Force load and play
                             video.load();
                             await video.play();
                             
-                            // Set delay to video duration, but ensure it's at least the video length
-                            const duration = Math.max(video.duration * 1000, video.duration * 1000);
+                            // Calculate actual video duration
+                            const duration = video.duration * 1000; // Convert to milliseconds
                             this.params.autoplay.delay = duration;
+                            
+                            // Add ended event listener to move to next slide
+                            video.addEventListener('ended', () => {
+                                this.slideNext();
+                            }, { once: true }); // Use once:true so event listener is automatically removed
                             
                             // Try to unmute after successful play
                             setTimeout(() => {
@@ -324,7 +330,6 @@ async function initSwiper() {
                             console.warn('Video playback failed:', err);
                             video.muted = true;
                             video.play().catch(() => {
-                                // If video fails to play, move to next slide when it's ready
                                 this.slideNext();
                             });
                         }
