@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tag Relations Streamgraph</title>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <style>
+        #streamgraph {
+            width: 100%;
+            height: 600px;
+        }
+        .tooltip {
+            position: absolute;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.0);
+            border: 1px solid #ddd;
+            pointer-events: none;
+            font-family: sans-serif;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div id="streamgraph"></div>
+
+    <script>
+        // Set the dimensions and margins of the graph
+        const margin = {top: 20, right: 30, bottom: 30, left: 60};
+        const width = 1000 - margin.left - margin.right;
+        const height = 600 - margin.top - margin.bottom;
+
+        // Append the svg object to the div
+        const svg = d3.select("#streamgraph")
+            .append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", `translate(${margin.left},${margin.top})`);
+
+        // Create tooltip div
+        const tooltip = d3.select("body")
+            .append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // Parse the Data
+        d3.csv("tag_relations.csv").then(function(data) {
+            // List of groups (columns)
+            const allKeys = data.columns.slice(1);
+            
+            // Filter keys based on sum >= 2
+            const keys = allKeys.filter(key => {
+                const sum = data.reduce((acc, row) => acc + (+row[key]), 0);
+                return sum >= 5;
+            });
+            
+            // Parse dates
+            const parseTime = d3.timeParse("%Y-%m");
+            data.forEach(d => {
+                d.month = parseTime(d.month);
+                keys.forEach(k => {
+                    d[k] = +d[k];
+                });
+            });
+
+            // Filter for dates after March 2024
+            const startDate = new Date(2024, 1); // Month is 0-based, so 2 = March
+            data = data.filter(d => d.month > startDate);
+
+            // Stack the data
+            const stack = d3.stack()
+                .offset(d3.stackOffsetWiggle)
+                .keys(keys);
+            
+            const stackedData = stack(data);
+
+            // Add X axis
+            const x = d3.scaleTime()
+                .domain(d3.extent(data, d => d.month))
+                .range([0, width]);
+            
+            svg.append("g")
+                .attr("transform", `translate(0,${height/2})`)
+                .call(d3.axisBottom(x));
+
+            // Add Y axis
+            const y = d3.scaleLinear()
+                .domain([
+                    d3.min(stackedData, layer => d3.min(layer, d => d[0])),
+                    d3.max(stackedData, layer => d3.max(layer, d => d[1]))
+                ])
+                .range([height, 0]);
+
+            // Color palette
+            const color = d3.scaleOrdinal()
+                .domain(keys)
+                .range([
+                    '#8dd3c7', '#ffffb3', '#bebada',
+                    '#fb8072', '#80b1d3', '#fdb462',
+                    '#b3de69', '#fccde5', '#d9d9d9',
+                    '#bc80bd', '#ccebc5', '#ffed6f'
+                ]);
+
+            // Area generator
+            const area = d3.area()
+                .x(d => x(d.data.month))
+                .y0(d => y(d[0]))
+                .y1(d => y(d[1]))
+                .curve(d3.curveBasis);
+
+            // Show the areas
+            svg.selectAll("mylayers")
+                .data(stackedData)
+                .join("path")
+                .attr("fill", d => color(d.key))
+                .attr("d", area)
+                .on("mouseover", function(event, d) {
+                    d3.select(this).style("opacity", 0.8);
+                    tooltip.style("opacity", 1);
+                })
+                .on("mousemove", function(event, d) {
+                    const mouseX = event.pageX;
+                    const mouseY = event.pageY;
+                    const key = d.key;
+                    
+                    tooltip
+                        .html(`Category: ${key}`)
+                        .style("left", (mouseX + 10) + "px")
+                        .style("top", (mouseY - 10) + "px");
+                })
+                .on("mouseleave", function(event, d) {
+                    d3.select(this).style("opacity", 1);
+                    tooltip.style("opacity", 0);
+                });
+        });
+    </script>
+</body>
+</html> 
