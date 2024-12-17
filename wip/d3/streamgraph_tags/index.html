@@ -11,7 +11,7 @@
         .tooltip {
             position: absolute;
             padding: 10px;
-            background: rgba(255, 255, 255, 0.0);
+            background: rgba(255, 255, 255, 0.8);
             border: 1px solid #ddd;
             pointer-events: none;
             font-family: sans-serif;
@@ -25,14 +25,14 @@
     <script>
         // Set the dimensions and margins of the graph
         const margin = {top: 20, right: 30, bottom: 30, left: 60};
-        const width = 1000 - margin.left - margin.right;
+        const width = document.getElementById("streamgraph").clientWidth - margin.left - margin.right;
         const height = 600 - margin.top - margin.bottom;
 
         // Append the svg object to the div
         const svg = d3.select("#streamgraph")
             .append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
+            .attr("width", "100%")
+            .attr("viewBox", `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
             .append("g")
             .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -53,17 +53,19 @@
                 return sum >= 5;
             });
             
-            // Parse dates
-            const parseTime = d3.timeParse("%Y-%m");
+            // Parse dates (year-week format)
             data.forEach(d => {
-                d.month = parseTime(d.month);
+                const [year, week] = d.month.split('-').map(Number);
+                // Create date from year and week number
+                const date = new Date(year, 0, 1 + (week - 1) * 7);
+                d.month = date;
                 keys.forEach(k => {
                     d[k] = +d[k];
                 });
             });
 
-            // Filter for dates after March 2024
-            const startDate = new Date(2024, 1); // Month is 0-based, so 2 = March
+            // Filter for dates after week 8 of 2024 (adjust as needed)
+            const startDate = new Date(2024, 0, 1 + (8 - 1) * 7); // Week 8
             data = data.filter(d => d.month > startDate);
 
             // Stack the data
@@ -113,8 +115,9 @@
                 .join("path")
                 .attr("fill", d => color(d.key))
                 .attr("d", area)
+                .style("opacity", 0.6)
                 .on("mouseover", function(event, d) {
-                    d3.select(this).style("opacity", 0.8);
+                    d3.select(this).style("opacity", 1);
                     tooltip.style("opacity", 1);
                 })
                 .on("mousemove", function(event, d) {
@@ -123,12 +126,12 @@
                     const key = d.key;
                     
                     tooltip
-                        .html(`Category: ${key}`)
+                        .html(`${key}`)
                         .style("left", (mouseX + 10) + "px")
                         .style("top", (mouseY - 10) + "px");
                 })
                 .on("mouseleave", function(event, d) {
-                    d3.select(this).style("opacity", 1);
+                    d3.select(this).style("opacity", 0.6);
                     tooltip.style("opacity", 0);
                 });
         });
