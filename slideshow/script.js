@@ -377,37 +377,49 @@ async function initSwiper() {
             breakpoints: {
                 320: {
                     slidesPerView: 1,
-                    spaceBetween: 20,
+                    spaceBetween: 10,
                     coverflowEffect: {
-                        rotate: 20,
-                        depth: 50
+                        rotate: 15,
+                        depth: 30,
+                        modifier: 1
                     }
                 },
                 480: {
                     slidesPerView: 'auto',
-                    spaceBetween: 30,
+                    spaceBetween: 20,
                     coverflowEffect: {
-                        rotate: 25,
-                        depth: 75
+                        rotate: 20,
+                        depth: 50,
+                        modifier: 1.2
                     }
                 },
                 768: {
                     slidesPerView: 'auto',
-                    spaceBetween: 40,
+                    spaceBetween: 30,
                     coverflowEffect: {
-                        rotate: 30,
-                        depth: 100
+                        rotate: 25,
+                        depth: 75,
+                        modifier: 1.3
                     }
                 },
                 1024: {
                     slidesPerView: 'auto',
-                    spaceBetween: 80,
+                    spaceBetween: 40,
                     coverflowEffect: {
                         rotate: 30,
-                        depth: 100
+                        depth: 100,
+                        modifier: 1.5
                     }
                 }
-            }
+            },
+            touchRatio: 1.5,
+            touchAngle: 45,
+            grabCursor: true,
+            watchSlidesProgress: true,
+            preventClicks: true,
+            preventClicksPropagation: true,
+            resistance: true,
+            resistanceRatio: 0.85
         });
 
     } catch (error) {
