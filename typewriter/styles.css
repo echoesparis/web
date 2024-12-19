@@ -1,5 +1,4 @@
 :root {
-    --text-primary: #666;
     --bg-primary: #12121200;
     --bg-color: transparent;
     --accent-color: currentColor;
@@ -31,7 +30,8 @@ html, body {
     overflow: hidden;
     font-family: 'Oswald', sans-serif;
     line-height: 1.6;
-    color: var(--text-primary);
+    color: #666;
+    text-shadow: 0 0 10px rgba(116, 116, 116, 0.3);
 }
 
 /* Layout */
