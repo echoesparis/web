@@ -31,7 +31,6 @@ html, body {
     font-family: 'Oswald', sans-serif;
     line-height: 1.6;
     color: #666;
-    text-shadow: 0 0 10px rgba(116, 116, 116, 0.3);
 }
 
 /* Layout */
@@ -72,27 +71,22 @@ section {
 /* Theme classes */
 .values { 
     color: var(--color-values);
-    text-shadow: 0 0 10px rgba(255, 255, 179, 0.3);
 }
 
 .expertise {
     color: var(--color-expertise);
-    text-shadow: 0 0 10px rgba(128, 177, 211, 0.3);
 }
 
 .customer {
     color: var(--color-customer);
-    text-shadow: 0 0 10px rgba(141, 211, 199, 0.3);
 }
 
 .impact {
     color: var(--color-impact);
-    text-shadow: 0 0 10px rgba(253, 180, 98, 0.3);
 }
 
 .technology {
     color: var(--color-technology);
-    text-shadow: 0 0 10px rgba(252, 205, 229, 0.3);
 }
 
 /* Animations */
