@@ -1,7 +1,16 @@
+/* Add CSS variables at the root level */
+:root {
+    --text-color: currentColor;
+    --bg-color: transparent;
+    --accent-color: currentColor;
+    --shadow-color: hsla(0, 0%, var(--l, 0%), 0.2);
+    --hover-glow: hsla(60, 100%, var(--l, 70%), 0.4);
+}
+
 .container {
     max-width: 100%;
     padding: 20px 0;
-    background: #00000000;
+    background: var(--bg-color);
     overflow: hidden;
     
 }
@@ -19,7 +28,7 @@
     
     
     max-width: 90%;
-    background: #00000000;
+    background: var(--bg-color);
     transition: transform 0.1s;
     display: flex;
     flex-direction: column;
@@ -38,15 +47,15 @@
     display: block;
     margin: 0 auto;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px var(--shadow-color);
     object-fit: contain;
 }
 
 /* Navigation button styles */
 .swiper-button-next,
 .swiper-button-prev {
-    color: #000;
-    background: rgba(255, 255, 255, 0.5);
+    color: var(--text-color);
+    background: var(--shadow-color);
     padding: 10px 10px;
     border-radius: 10%;
     width: 10px;
@@ -60,7 +69,7 @@
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-    background: rgba(255, 255, 255, 1);
+    background: var(--hover-glow);
 }
 
 /* Pagination styles */
@@ -72,7 +81,7 @@
 .swiper-pagination-bullet {
     width: 12px;
     height: 12px;
-    background: #313131;
+    background: var(--text-color);
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -80,7 +89,7 @@
 
 .swiper-pagination-bullet-active {
     opacity: 1;
-    background: #000;
+    background: var(--text-color);
     transform: scale(1.2);
 }
 
@@ -117,7 +126,7 @@ video::-webkit-media-controls-play-button {
     position: absolute;
     bottom: -35px;
     text-align: center;
-    color: #666;
+    color: var(--text-color);
     font-size: 14px;
     font-family: monospace;
     white-space: nowrap;
@@ -199,7 +208,7 @@ video::-webkit-media-controls-play-button {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0);
+    background: var(--bg-color);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -210,14 +219,14 @@ video::-webkit-media-controls-play-button {
 .loader-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #333;
+    border: 3px solid var(--text-color);
     border-radius: 50%;
-    border-top-color: #fff;
+    border-top-color: var(--accent-color);
     animation: spin 1s linear infinite;
 }
 
 .loader-text {
-    color: #fff;
+    color: var(--text-color);
     margin-top: 20px;
     font-family: monospace;
 }
@@ -244,7 +253,7 @@ video::-webkit-media-controls-play-button {
 .swiper-slide a:hover video {
     transform: scale(1.02); /* Subtle zoom on hover */
     /* Combine both shadows */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px #ffffb369; /* Base shadow + glow effect */
+    box-shadow: 0 4px 8px var(--shadow-color), 0 0 20px var(--hover-glow); /* Base shadow + glow effect */
 }
 
 /* Add a small icon to indicate clickable images */
@@ -257,13 +266,14 @@ video::-webkit-media-controls-play-button {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: rgba(255, 255, 255, 0.8);
+    background: var(--hover-glow);
     padding: 5px 8px;
     border-radius: 0 8px 0 8px;
     font-size: 14px;
     opacity: 0.7;
     transition: opacity 0.3s ease;
     z-index: 1;
+    color: var(--text-color);
 }
 
 .swiper-slide a:hover::after {
@@ -319,6 +329,19 @@ video::-webkit-media-controls-play-button {
     .swiper-slide img,
     .swiper-slide video {
         max-height: 60vh;
+    }
+}
+
+/* Add dark/light mode detection */
+@media (prefers-color-scheme: light) {
+    :root {
+        --l: 0%; /* Darker shadows for light mode */
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --l: 100%; /* Lighter shadows for dark mode */
     }
 }
 
