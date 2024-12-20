@@ -3,17 +3,19 @@
       "src": "090-01_500.jpg",
       "url": "",
       "caption": "large scale wind analysis",
-      "tags": ["computational wind engineering (CWE)","computational fluid dynamics (CFD)"]
+      "tags": ["computational wind engineering (CWE)","computational fluid dynamics (CFD)","outdoor thermal comfort (OTC)","cloud computing"]
     },
     {
       "src": "h147_02_500.jpg",
       "url": "https://echoes.paris/cases/climate-ribbon",
-      "caption": "solar datascape"
+      "caption": "",
+      "tags":["datascape", "solar design","solar access","solar shading systems","mean solar vectors (MSV)"]
     },
     {
       "src": "h100_SP_24_500.png",
       "url": "",
-      "caption": ""
+      "caption": "",
+      "tags": ["complex structures","computational engineering","structural engineering","structural optimization","spaceframe","freeform","daylighting"]
     },
     {
       "src": "086_02_500.gif",
@@ -32,13 +34,13 @@
       "src": "080-02_500.jpg",
       "url": "",
       "caption": "",
-      "tags": ["parametric modelling"]
+      "tags": ["parametric modelling","parametric design","dynamic relaxation"]
     },
     {
       "src": "063_05_500.mp4",
       "url": "",
       "caption": "",
-      "tags": ["timber structures", "gridshells", "lightweight structures"]
+      "tags": ["gridshell","form-finding","timber structures","timber engineering","active bending", "lightweight structures"]
     },
     {
       "src": "090-03_500.jpg",
@@ -56,19 +58,19 @@
       "src": "087-01_500.jpg",
       "url": "",
       "caption": "",
-      "tags": [""]
+      "tags": ["urban shading"]
     },
     {
       "src": "083-01_500.gif",
       "url": "",
       "caption": "",
-      "tags": [""]
+      "tags": ["art investigations","3D scanning","photogrammetry"]
     },
     {
       "src": "080-01_500.gif",
       "url": "",
       "caption": "",
-      "tags": [""]
+      "tags": ["parametric modelling","parametric design","dynamic relaxation"]
     },
     {
       "src": "000_solar massing automata_02_500.jpg",
@@ -80,7 +82,7 @@
       "src": "074_Ambiantal clustering_100_500.png",
       "url": "https://echoes.paris/cases/ctvd",
       "caption": "ambiances clustering to define scenographic sequences",
-      "tags": ["cluster analysis","k-means clustering"]
+      "tags": ["scenography","cluster analysis","k-means clustering","cloud computing"]
     },
     {
       "src": "024_07_500.jpg",
@@ -106,14 +108,14 @@
     {
       "src": "Massing Heuristics_04.mp4",
       "url": "https://echoes.paris/posts/typology-aware-generative-masterplanning",
-      "caption": "typology-aware generative masterplanning",
-      "tags": ["procedural modelling","dynamic masterplanning"]
+      "caption": "",
+      "tags": ["procedural modelling","dynamic masterplanning","urban typologies"]
     },
     {
       "src": "080-03_500.jpg",
       "url": "",
       "caption": "advanced geometries",
-      "tags": [""]
+      "tags": ["parametric modelling"]
     },
     {
       "src": "h147_SP_Solar Data Computation _500.mp4",
@@ -136,18 +138,18 @@
       "src": "T_surf_500.gif",
       "url": "https://echoes.paris/scripts/surface-temperature",
       "caption": "surface temperature modelling",
-      "tags": ["urban heat island (UHI)"]
+      "tags": ["urban heat island (UHI)","outdoor thermal comfort (OTC)"]
     },
     {
       "src": "shells_form_kagome_00_500.mp4",
       "url": "https://echoes.paris/scripts/shells-structural-form-finding",
-      "tags": ["gridshell","form-finding"]
+      "tags": ["gridshell","form-finding","timber structures","timber engineering","active bending", "lightweight structures"]
     },
     {
       "src": "023_01_500.jpg",
       "url": "https://echoes.paris/cases/henri-iv-bridge-building",
-      "caption": "design competitions - reinventing cities",
-      "tags": ["structural design","architectural design"]
+      "caption": "reinventing cities",
+      "tags": ["structural design","architectural design","crossings"]
     },
     {
       "src": "mesh division_1_500px.mp4",
@@ -158,8 +160,8 @@
     {
       "src": "ViewCapture202402xx_500.jpg",
       "url": "https://echoes.paris/scripts/point-cloud-ops",
-      "caption": "3D scan processing",
-      "tags": ["point clouds","semantic segmentation"]
+      "caption": "",
+      "tags": ["point clouds","semantic segmentation","3D scanning"]
     },
     {
       "src": "ocean wave shader_500.mp4",
@@ -186,7 +188,8 @@
     {
       "src": "DVF2019_ValeurFonciere_inf100k€,sup1000m2_500.png",
       "url": "https://echoes.paris/scripts/dvf",
-      "caption": "location intelligence - mapping"
+      "caption": "",
+      "tags": ["location intelligence","cartography","real-estate"]
     },
     {
       "src": "SD_500.gif",

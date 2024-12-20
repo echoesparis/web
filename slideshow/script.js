@@ -2,6 +2,15 @@ document.addEventListener('click', function() {
     document.documentElement.setAttribute('data-user-interacted', 'true');
 }, { once: true });
 
+// Add this shuffle function
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
 async function getMediaFiles() {
     try {
         console.log('Starting getMediaFiles...');
@@ -15,7 +24,8 @@ async function getMediaFiles() {
             src: `src/${file.src}` // Prepend the src/ folder path
         }));
 
-        return processedFiles;
+        // Shuffle the array
+        return shuffleArray(processedFiles);
     } catch (error) {
         console.error('Error loading media files:', error);
         return [];
@@ -221,13 +231,13 @@ async function initSwiper() {
             grabCursor: true,
             centeredSlides: true,
             slidesPerView: 'auto',
-            spaceBetween: 80,
+            spaceBetween: 0,
             coverflowEffect: {
                 rotate: 30,
                 stretch: 0,
                 depth: 100,
                 modifier: 2,
-                slideShadows: true,
+                slideShadows: false,
             },
             autoplay: {
                 delay: 2500,
@@ -377,7 +387,7 @@ async function initSwiper() {
             breakpoints: {
                 320: {
                     slidesPerView: 1,
-                    spaceBetween: 10,
+                    spaceBetween: 0,
                     coverflowEffect: {
                         rotate: 15,
                         depth: 30,
@@ -386,7 +396,7 @@ async function initSwiper() {
                 },
                 480: {
                     slidesPerView: 'auto',
-                    spaceBetween: 20,
+                    spaceBetween: 0,
                     coverflowEffect: {
                         rotate: 20,
                         depth: 50,
@@ -395,7 +405,7 @@ async function initSwiper() {
                 },
                 768: {
                     slidesPerView: 'auto',
-                    spaceBetween: 30,
+                    spaceBetween: 0,
                     coverflowEffect: {
                         rotate: 25,
                         depth: 75,
@@ -404,7 +414,7 @@ async function initSwiper() {
                 },
                 1024: {
                     slidesPerView: 'auto',
-                    spaceBetween: 40,
+                    spaceBetween: 0,
                     coverflowEffect: {
                         rotate: 30,
                         depth: 100,
