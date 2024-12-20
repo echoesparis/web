@@ -190,7 +190,7 @@ async function initSwiper() {
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.setAttribute('data-index', index);
-            slide.innerHTML = '<div class="slide-placeholder"></div>';
+            slide.innerHTML = '<div class="slide-placeholder" style="display: flex; justify-content: center; align-items: center; height: 100%;"></div>';
             swiperWrapper.appendChild(slide);
         });
 
@@ -429,7 +429,12 @@ async function initSwiper() {
             preventClicks: true,
             preventClicksPropagation: true,
             resistance: true,
-            resistanceRatio: 0.85
+            resistanceRatio: 0.85,
+            updateOnWindowResize: true,
+            observer: true,
+            observeParents: true,
+            centerInsufficientSlides: true,
+            watchOverflow: true,
         });
 
     } catch (error) {
