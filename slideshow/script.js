@@ -270,79 +270,24 @@ async function initSwiper() {
                     const nextIndex = (currentIndex + 1) % mediaFiles.length;
                     const prevIndex = (currentIndex - 1 + mediaFiles.length) % mediaFiles.length;
 
-                    // Pause existing videos
-                    document.querySelectorAll('video').forEach(video => {
-                        video.pause();
-                        video.currentTime = 0;
-                    });
-
                     // Preload next and previous slides
                     await Promise.all([
                         loadSlide(nextIndex),
                         loadSlide(prevIndex)
                     ]);
-
-                    // Pre-prepare next video
-                    const nextSlide = swiperWrapper.querySelector(`[data-index="${nextIndex}"]`);
-                    if (nextSlide) {
-                        const nextVideo = nextSlide.querySelector('video');
-                        if (nextVideo) {
-                            nextVideo.load();
-                            nextVideo.currentTime = 0;
-                            nextVideo.preload = 'auto';
-                            // Try to buffer by playing then pausing
-                            nextVideo.play().then(() => nextVideo.pause()).catch(console.warn);
-                        }
-                    }
                 },
                 slideChangeTransitionEnd: function() {
                     const activeSlide = this.slides[this.activeIndex];
                     if (!activeSlide) return;
 
                     const video = activeSlide.querySelector('video');
-                    if (!video) {
+                    if (video) {
+                        // For video slides, set delay to video duration
+                        this.params.autoplay.delay = video.duration * 1000 || 2500;
+                    } else {
+                        // For non-video slides, use default delay
                         this.params.autoplay.delay = 2500;
-                        return;
                     }
-
-                    const playVideo = async () => {
-                        try {
-                            // Reset video state
-                            video.currentTime = 0;
-                            video.muted = true;
-                            video.playbackRate = 1.0;
-                            video.loop = false; // Ensure video doesn't loop
-
-                            // Force load and play
-                            video.load();
-                            await video.play();
-                            
-                            // Calculate actual video duration
-                            const duration = video.duration * 1000; // Convert to milliseconds
-                            this.params.autoplay.delay = duration;
-                            
-                            // Add ended event listener to move to next slide
-                            video.addEventListener('ended', () => {
-                                this.slideNext();
-                            }, { once: true }); // Use once:true so event listener is automatically removed
-                            
-                            // Try to unmute after successful play
-                            setTimeout(() => {
-                                if (document.documentElement.hasAttribute('data-user-interacted')) {
-                                    video.muted = false;
-                                }
-                            }, 100);
-
-                        } catch (err) {
-                            console.warn('Video playback failed:', err);
-                            video.muted = true;
-                            video.play().catch(() => {
-                                this.slideNext();
-                            });
-                        }
-                    };
-
-                    playVideo();
                 },
                 beforeSlideChangeStart: async function() {
                     const nextIndex = (this.realIndex + 1) % this.slides.length;
@@ -372,10 +317,9 @@ async function initSwiper() {
                     }
                 },
                 resize: function () {
-                    this.update(); // Update Swiper on window resize
+                    this.update();
                 },
                 beforeResize: function () {
-                    // Recalculate sizes before resize
                     this.updateSize();
                     this.updateSlides();
                 }
