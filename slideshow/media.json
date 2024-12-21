@@ -9,7 +9,7 @@
       "src": "h147_02_500.jpg",
       "url": "https://echoes.paris/cases/climate-ribbon",
       "caption": "",
-      "tags":["datascape", "solar design","solar access","solar shading systems","mean solar vectors (MSV)"]
+      "tags":["datascape", "solar design","solar access","mean solar vectors (MSV)"]
     },
     {
       "src": "h100_SP_24_500.png",
@@ -126,8 +126,8 @@
     {
       "src": "h147_SP_04_500.jpg",
       "url": "https://echoes.paris/cases/climate-ribbon",
-      "caption": "Climate Ribbon™, Miami. Parametric shading component",
-      "tags": ["non-standard","component instanciation"]
+      "caption": "Climate Ribbon™, Miami.",
+      "tags": ["parametric design","solar shading systems","non-standard","component instanciation"]
     },
     {
       "src": "050- VO_500.png",
