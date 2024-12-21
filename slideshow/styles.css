@@ -15,7 +15,6 @@ html, body {
     font-family: monospace;
     background: var(--bg-color);
     color: var(--text-color);
-    overflow: hidden;
 }
 
 body.embedded {
@@ -26,100 +25,68 @@ body.embedded {
 
 .container {
     max-width: 100%;
-    padding: 0;
     overflow: hidden;
-    height: 100vh;
+    height: 100%;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
 }
 
 /* Swiper modifications */
 .swiper {
     width: 100%;
-    height: 100vh;
-    padding: 0;
+    height: 100vh; /* Set explicit height */
     display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.swiper-wrapper {
-    height: auto;
     align-items: center;
 }
 
 .swiper-slide {
-    max-width: 90%;
-    height: auto !important;
+    height: 100%; 
+    transition: transform 0.1s;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s ease;
-    position: relative;
-    padding: 40px 0;
+    overflow: hidden;
+}
+
+.slide-content {
+    max-height: 100%; /* Ensure content doesn't overflow */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px; /* Add some padding */
 }
 
 /* Media elements */
 .swiper-slide img,
 .swiper-slide video {
-    max-height: calc(100vh - 120px);
+    max-height: 90vh; /* Account for caption space */
     max-width: 100%;
     width: auto;
     height: auto;
-    display: block;
-    margin: 0 auto;
-    border-radius: 8px;
     object-fit: contain;
-    object-position: center;
-}
-
-/* Navigation buttons */
-.swiper-button-next,
-.swiper-button-prev {
-    color: var(--text-color);
-    background: var(--shadow-color);
-    padding: 10px;
-    border-radius: 10%;
-    width: 10px;
-    height: 10px;
-    margin-top: 0;
-    transform: translateY(-50%);
-}
-
-.swiper-button-next:after,
-.swiper-button-prev:after {
-    font-size: 10px;
-}
-
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-    background: rgba(255, 255, 255, 1);
 }
 
 /* Pagination styles */
 .swiper-pagination {
-    position: absolute;
-    bottom: 10px;
-    left: 0;
-    right: 0;
-    margin: 0;
+    position: fixed !important; 
+    bottom: 10px !important; 
+    z-index: 10;
 }
 
 .swiper-pagination-bullet {
-    width: 12px;
-    height: 12px;
-    background: #313131;
+    background: #666;
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.3s ease;
+    margin: 0 5px;
+    display: inline-block;
 }
 
 .swiper-pagination-bullet-active {
     opacity: 1;
-    background: #000;
+    background: #ffffb369;
     transform: scale(1.2);
 }
 
@@ -130,49 +97,40 @@ body.embedded {
 
 /* Add styles for the active/center slide */
 .swiper-slide-active {
-    transform: scale(1.5);
+    transform: scale(1.2);
     z-index: 2;
-    
 }
 
 /* Adjust adjacent slides */
 .swiper-slide-prev,
 .swiper-slide-next {
-    transform: scale(0.9);
+    transform: scale(0.7);
     opacity: 0.2;
 }
 
-/* Optional: Custom video controls styling */
-video::-webkit-media-controls-panel {
-    background-color: rgba(0, 0, 0, 0.5);
-}
 
-video::-webkit-media-controls-play-button {
-    border-radius: 50%;
-}
 
 /* Update caption styles */
 .slide-caption {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    position: relative;
+    bottom: -10px;
     text-align: center;
     color: #666;
     font-size: 14px;
     font-family: monospace;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 5px;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 8px;
+    flex-wrap: wrap;
+    max-width: 100%;
+    word-break: break-word;
 }
 
 .caption-text {
     display: inline-block;
+    max-width: 100%;
 }
 
 .tag-link {
@@ -208,30 +166,17 @@ video::-webkit-media-controls-play-button {
     color: inherit;
     text-decoration: none;
     display: inline-block;
-    border-bottom: 1px solid #666;
-    padding-bottom: 2px;
     transition: all 0.2s ease;
     max-width: 100%;
-    text-decoration: none;
-    border-bottom: none;
 }
 
 .slide-caption a:hover {
-    color: inherit;
     border-bottom-color: inherit;
-    text-decoration: none;
+    text-decoration: underline;
     border-bottom: none;
 }
 
-/* Remove previous link styles */
-.swiper-slide a {
-    display: block;
-    text-decoration: none;
-}
 
-.swiper-slide a:hover {
-    cursor: default;
-}
 
 /* Loading styles */
 .loader {
@@ -240,7 +185,6 @@ video::-webkit-media-controls-play-button {
     left: 0;
     width: 100%;
     height: 100%;
-    
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -251,15 +195,15 @@ video::-webkit-media-controls-play-button {
 .loader-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #333;
+    border: 3px solid #666;
     border-radius: 50%;
-    border-top-color: #fff;
+    border-top-color: #666;
     animation: spin 1s linear infinite;
 }
 
 .loader-text {
-    color: #fff;
-    margin-top: 20px;
+    color: #666;
+    margin-top: 10px;
     font-family: monospace;
 }
 
@@ -271,9 +215,6 @@ video::-webkit-media-controls-play-button {
 .loader.hidden {
     display: none;
 }
-
-
-
 
 /* Add hover effect for clickable images */
 .swiper-slide a img,
@@ -287,6 +228,7 @@ video::-webkit-media-controls-play-button {
     /* Combine both shadows */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px #ffffb369; /* Base shadow + glow effect */
 }
+
 
 /* Add a small icon to indicate clickable images */
 .swiper-slide a {
@@ -317,131 +259,14 @@ video::-webkit-media-controls-play-button {
     display: none;  /* This will hide the arrow on caption links */
 }
 
-
 .error-message {
     color: #666;
     text-align: center;
     padding: 20px;
 }
 
-/* Media queries for different screen sizes */
-@media screen and (max-width: 768px) {
-    .container {
-        padding: 10px 0;
-    }
-
-    .swiper {
-        padding-top: 15px;
-        padding-bottom: 30px;
-        min-height: 200px;
-        max-height: 90vh;
-    }
-
-    .swiper-slide {
-        max-width: 95%;
-    }
-
-    .swiper-slide img,
-    .swiper-slide video {
-        max-height: 75vh;
-        border-radius: 4px;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-        padding: 8px;
-        width: 8px;
-        height: 8px;
-        opacity: 0.7;
-    }
-
-    .swiper-button-next:after,
-    .swiper-button-prev:after {
-        font-size: 8px;
-    }
-
-    .slide-caption {
-        font-size: 12px;
-        padding: 5px;
-        bottom: -25px;
-    }
-
-    .tag-link {
-        font-size: 11px;
-        margin: 1px;
-    }
-
-    .loader-spinner {
-        width: 30px;
-        height: 30px;
-        border-width: 2px;
-    }
-
-    .loader-text {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
-        padding: 10px 0;
-    }
-
-    .swiper {
-        padding-top: 10px;
-        padding-bottom: 25px;
-    }
-
-    .swiper-slide {
-        max-width: 98%;
-    }
-
-    .swiper-button-next,
-    .swiper-button-prev {
-        display: none;
-    }
-
-    .swiper-pagination-bullet {
-        width: 8px;
-        height: 8px;
-        margin: 0 4px;
-    }
-
-    .slide-caption {
-        font-size: 11px;
-        white-space: normal;
-        max-height: 40px;
-        overflow-y: auto;
-    }
-}
-
-@media screen and (max-height: 480px) and (orientation: landscape) {
-    .swiper {
-        padding-top: 5px;
-        padding-bottom: 20px;
-        min-height: 150px;
-    }
-
-    .swiper-slide img,
-    .swiper-slide video {
-        max-height: 85vh;
-    }
-
-    .slide-caption {
-        position: relative;
-        bottom: 0;
-        margin-top: 5px;
-    }
-}
 
 @media (hover: none) {
-    .swiper-button-next,
-    .swiper-button-prev {
-        padding: 15px;
-        width: 15px;
-        height: 15px;
-    }
-
     .swiper-pagination-bullet {
         width: 12px;
         height: 12px;
