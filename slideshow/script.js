@@ -81,10 +81,11 @@ async function createSlideElement(media) {
         }).join(' ') : '';
 
         return `
-            ${content}
-            <div class="slide-caption">
-                <span class="caption-text">${media.caption || ''}</span>
-                ${tagsHtml}
+            <div class="slide-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
+                ${content}
+                <div class="slide-caption">
+                    <span class="caption-text">${media.caption || ' '} ${tagsHtml}</span>
+                </div>
             </div>
         `;
     } catch (error) {
@@ -248,10 +249,6 @@ async function initSwiper() {
             speed: 800,
             loop: true,
             loopAdditionalSlides: 3,
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
