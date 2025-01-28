@@ -1,4 +1,4 @@
-<span class="technology">[design*engineering]^computation</span>
+<span class="technology">[ design * engineering ] ^ computation</span>
 we embrace <span class="values">complexity</span> as an opportunity for <span class="values">innovation</span>
 we prioritize <span class="values">sustainable</span> and <span class="values">responsible</span> design solutions
 we stay <span class="values">curious</span> and open to emerging <span class="technology">technologies</span>
