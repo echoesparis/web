@@ -1,3 +1,4 @@
+<span class="technology">[design*engineering]^computation</span>
 we embrace <span class="values">complexity</span> as an opportunity for <span class="values">innovation</span>
 we prioritize <span class="values">sustainable</span> and <span class="values">responsible</span> design solutions
 we stay <span class="values">curious</span> and open to emerging <span class="technology">technologies</span>
@@ -14,18 +15,17 @@ we save time by automating complex <span class="impact">design tasks</span>
 we find efficient solutions to <span class="expertise">technical challenges</span>
 we reduce errors through <span class="impact">systematic approaches</span>
 we reduce <span class="impact">design time</span> through automation
-we enable <span class="impact">data-driven design</span> decisions
+we enable <span class="impact">data-driven</span> design decisions
 we understand both <span class="expertise">design thinking</span> and <span class="expertise">programming</span>
 we build reliable <span class="technology">digital tools</span> and workflows
 we excel in <span class="expertise">parametric modeling</span> and optimization
 we develop <span class="technology">cloud-based</span> architectural tools
-we stay small and agile to adapt quickly
+we stay small and <span class="values">agile</span> to adapt quickly
 we have proven experience with complex <span class="expertise">architectural projects</span>
 we assist <span class="customer">engineers</span> seeking efficient solutions
 we support <span class="customer">builders</span> optimizing their methods
 we collaborate with <span class="customer">researchers</span> and serve innovative <span class="customer">design firms</span>
 we support <span class="customer">engineering consultancies</span> and assist <span class="customer">construction companies</span>
-we help reducing waste in design and construction
 we bring teams closer together through <span class="technology">technology</span>
 we are a small team of <span class="expertise">computational designers</span> and <span class="expertise">researchers</span> working at the intersection of <span class="customer">architecture, engineering, and technology</span>
 we help <span class="customer">architects and engineers</span> solve complex design challenges through custom <span class="technology">computational solutions</span>
@@ -56,7 +56,7 @@ we teach others how to leverage <span class="technology">computational design to
 we connect different disciplines through shared <span class="technology">digital platforms</span>
 we automate repetitive tasks to free up time for design thinking
 we help small studios access advanced design capabilities
-we optimize building performance through <span class="expertise">data-driven decisions</span>
+we optimize building performance through <span class="expertise">data-driven</span> decisions
 we create custom tools that solve specific design challenges
 we reduce errors through systematic and automated approaches
 we adapt our solutions to fit within existing workflows
@@ -67,7 +67,7 @@ we integrate environmental analysis into early design stages
 we focus on practical solutions rather than theoretical concepts
 we collaborate with universities to advance design education
 we minimize material waste through precise <span class="technology">digital modeling</span>
-we explain complex concepts in accessible ways
+we explain complex concepts in <span class="values">accessible</span> ways
 we value both artistic vision and <span class="expertise">technical excellence</span>
 we bring <span class="technology">computational tools</span> to traditional crafts
-we contribute to a more <span class="impact">sustainable built environment</span>
+we contribute to a more <span class="impact">sustainable</span> built environment
