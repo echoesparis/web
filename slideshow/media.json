@@ -79,12 +79,6 @@
       "tags": ["parametric modelling","parametric design","dynamic relaxation"]
     },
     {
-      "src": "000_solar massing automata_02_500.jpg",
-      "url": "https://echoes.paris/scripts/urbsolar-massing-automatagh",
-      "caption": "solar massing automata",
-      "tags": ["cellular automata (CA)","solar design"]
-    },
-    {
       "src": "074_Ambiantal clustering_100_500.png",
       "url": "https://echoes.paris/cases/ctvd",
       "caption": "ambiances clustering to define scenographic sequences",
@@ -158,10 +152,10 @@
       "tags": ["structural design","architectural design","crossings"]
     },
     {
-      "src": "mesh division_1_500px.mp4",
-      "url": "https://echoes.paris/scripts/mesh-division",
-      "caption": "Cellular mesh division",
-      "tags": ["algorithmic design"]
+      "src": "000_solar massing automata_02_500.jpg",
+      "url": "https://echoes.paris/scripts/urbsolar-massing-automatagh",
+      "caption": "solar massing automata",
+      "tags": ["cellular automata (CA)","solar design"]
     },
     {
       "src": "ViewCapture202402xx_500.jpg",
