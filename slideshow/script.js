@@ -69,7 +69,7 @@ async function createSlideElement(media) {
             ? `<a href="${media.url}" target="_blank">${mediaElement}</a>`
             : mediaElement;
 
-        // Generate tags HTML if present
+        // Generate tags HTML if present - Modified to target parent window
         const tagsHtml = media.tags ? media.tags.map(tag => {
             const displayText = tag.match(/\((.*?)\)/) 
                 ? tag.match(/\((.*?)\)/)[1]
@@ -77,7 +77,7 @@ async function createSlideElement(media) {
             const tagUrl = tag.toLowerCase()
                 .replace(/\s+/g, '-')
                 .replace(/[()]/g, '');
-            return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}">#${displayText}</a></span>`;
+            return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}" target="_parent">#${displayText}</a></span>`;
         }).join(' ') : '';
 
         return `
