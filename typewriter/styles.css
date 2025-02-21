@@ -70,23 +70,33 @@ section {
 
 /* Theme classes */
 .values { 
-    color: var(--color-values);
+    text-decoration: underline;
+    text-decoration-color: var(--color-values);
+    text-decoration-thickness: 2px;
 }
 
 .expertise {
-    color: var(--color-expertise);
+    text-decoration: underline;
+    text-decoration-color: var(--color-expertise);
+    text-decoration-thickness: 2px;
 }
 
 .customer {
-    color: var(--color-customer);
+    text-decoration: underline;
+    text-decoration-color: var(--color-customer);
+    text-decoration-thickness: 2px;
 }
 
 .impact {
-    color: var(--color-impact);
+    text-decoration: underline;
+    text-decoration-color: var(--color-impact);
+    text-decoration-thickness: 2px;
 }
 
 .technology {
-    color: var(--color-technology);
+    text-decoration: underline;
+    text-decoration-color: var(--color-technology);
+    text-decoration-thickness: 2px;
 }
 
 /* Animations */
