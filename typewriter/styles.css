@@ -94,10 +94,95 @@ section {
     text-decoration-color: var(--color-technology);
 }
 
+/* Notion background colors */
+.gray {
+    background-color: #E9ECEF;
+}
+
+.brown {
+    background-color: #E9D5CF;
+}
+
+.orange {
+    background-color: #FADFCA;
+}
+
+.yellow {
+    background-color: #FBF3DB;
+}
+
+.green {
+    background-color: #DDEDEA;
+}
+
+.blue {
+    background-color: #DDEBF1;
+}
+
+.purple {
+    background-color: #EAE4F2;
+}
+
+.pink {
+    background-color: #F4DFEB;
+}
+
+.red {
+    background-color: #FFE2DD;
+}
+
+/* Notion text colors */
+.text-gray {
+    color: #787774;
+}
+
+.text-brown {
+    color: #9F6B53;
+}
+
+.text-orange {
+    color: #D9730D;
+}
+
+.text-yellow {
+    color: #CB912F;
+}
+
+.text-green {
+    color: #448361;
+}
+
+.text-blue {
+    color: #337EA9;
+}
+
+.text-purple {
+    color: #9065B0;
+}
+
+.text-pink {
+    color: #C14C8A;
+}
+
+.text-red {
+    color: #D44C47;
+}
+
 /* Animations */
 @keyframes blink {
     0% { opacity: 0 }
     50% { opacity: 1 }
     100% { opacity: 0 }
+}
+
+/* Notion link styling */
+.notion-link {
+    text-decoration: underline;
+    color: inherit;
+    transition: background-color 0.2s ease;
+}
+
+.notion-link:hover {
+    background-color: rgba(55, 53, 47, 0.08);
 }
 
