@@ -1,7 +1,7 @@
 const TYPEWRITER_CONFIG = {
     loop: true,
     delay: 30,
-    deleteSpeed: 20,
+    deleteSpeed: 5,
     cursor: '▋',
     pauseFor: 2000
 };
@@ -55,7 +55,8 @@ class TypewriterManager {
             this.typewriter
                 .typeString(text.trim())
                 .pauseFor(2000)
-                .deleteAll(1);
+                .deleteAll(5)
+                .pauseFor(500);
         });
 
         this.typewriter.start();
@@ -73,7 +74,9 @@ class TypewriterManager {
             for (let entry of entries) {
                 const width = entry.contentRect.width;
                 if (this.typewriter) {
-                    this.typewriter.changeDelay(width < 768 ? 40 : 30);
+                    const isMobile = width < 768;
+                    this.typewriter.changeDelay(isMobile ? 40 : 30);
+                    this.typewriter.changeDeleteSpeed(isMobile ? 30 : 20);
                 }
             }
         });
