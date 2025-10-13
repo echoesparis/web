@@ -1,5 +1,5 @@
-design engineering consultancy and tech studio, led by <a href="https://echoes.paris/team/sebastien-perrault" class="notion-link">Sébastien Perrault</a>
-pioneering computational design studio bridging creativity and technical excellence.
+computational design studio 
+bridging creativity and technical excellence.
 transforming <span class="green">complex </span>challenges into <span class="green">elegant </span>solutions
 delivering <span class="green">practical </span>solutions through <span class="green">innovative </span>design and <span class="green">critical </span>thinking
 merging <span class="green">research</span>-driven innovation with <span class="green">hands-on</span> expertise

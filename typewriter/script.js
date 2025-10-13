@@ -51,14 +51,10 @@ class TypewriterManager {
 
         this.typewriter = new Typewriter('#main', TYPEWRITER_CONFIG);
         
-        content.forEach((text, index) => {
-            // First sentence gets longer pause before deletion
-            const isFirstSentence = index === 0;
-            const pauseTime = isFirstSentence ? 3000 : 2000;
-            
+        content.forEach((text) => {
             this.typewriter
                 .typeString(text.trim())
-                .pauseFor(pauseTime)
+                .pauseFor(2000)
                 .deleteAll(5)
                 .pauseFor(500);
         });
