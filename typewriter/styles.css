@@ -94,41 +94,50 @@ section {
     text-decoration-color: var(--color-technology);
 }
 
-/* Notion background colors */
+/* Notion background colors - now using colored underlines only */
 .gray {
-    background-color: #E9ECEF;
+    text-decoration: underline;
+    text-decoration-color: #E9ECEF;
 }
 
 .brown {
-    background-color: #E9D5CF;
+    text-decoration: underline;
+    text-decoration-color: #E9D5CF;
 }
 
 .orange {
-    background-color: #FADFCA;
+    text-decoration: underline;
+    text-decoration-color: #FADFCA;
 }
 
 .yellow {
-    background-color: #FBF3DB;
+    text-decoration: underline;
+    text-decoration-color: #FBF3DB;
 }
 
 .green {
-    background-color: #DDEDEA;
+    text-decoration: underline;
+    text-decoration-color: #DDEDEA;
 }
 
 .blue {
-    background-color: #DDEBF1;
+    text-decoration: underline;
+    text-decoration-color: #DDEBF1;
 }
 
 .purple {
-    background-color: #EAE4F2;
+    text-decoration: underline;
+    text-decoration-color: #EAE4F2;
 }
 
 .pink {
-    background-color: #F4DFEB;
+    text-decoration: underline;
+    text-decoration-color: #F4DFEB;
 }
 
 .red {
-    background-color: #FFE2DD;
+    text-decoration: underline;
+    text-decoration-color: #FFE2DD;
 }
 
 /* Notion text colors */
