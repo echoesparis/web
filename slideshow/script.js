@@ -56,13 +56,33 @@ async function createSlideElement(media) {
     try {
         const isVideo = getMediaType(media.src);
         
-        // Create media element based on type - remove lazy loading for videos
-        const mediaElement = isVideo === 'video'
-            ? `<video controls playsinline muted autoplay preload="auto">
-                 <source src="${media.src}" type="video/mp4">
-                 Your browser does not support the video tag.
-               </video>`
-            : `<img src="${media.src}" alt="${media.caption || ''}" loading="lazy">`;
+        // Create media element based on type with better video support
+        let mediaElement;
+        if (isVideo === 'video') {
+            // Check if browser supports video
+            if (videoSupport.mp4 || videoSupport.webm || videoSupport.ogg) {
+                const sources = [];
+                if (videoSupport.mp4) sources.push(`<source src="${media.src}" type="video/mp4">`);
+                if (videoSupport.webm) sources.push(`<source src="${media.src.replace('.mp4', '.webm')}" type="video/webm">`);
+                if (videoSupport.ogg) sources.push(`<source src="${media.src.replace('.mp4', '.ogg')}" type="video/ogg">`);
+                
+                mediaElement = `<video controls playsinline muted autoplay preload="auto">
+                     ${sources.join('')}
+                     Your browser does not support the video tag.
+                   </video>`;
+            } else {
+                // Fallback for browsers without video support
+                mediaElement = `<div class="video-fallback">
+                     <div class="video-placeholder">
+                         <span class="video-icon">🎥</span>
+                         <p>Video not supported</p>
+                         <a href="${media.src}" target="_blank" class="video-download">Download Video</a>
+                     </div>
+                 </div>`;
+            }
+        } else {
+            mediaElement = `<img src="${media.src}" alt="${media.caption || ''}" loading="lazy">`;
+        }
 
         // Wrap in link if URL is provided
         const content = media.url
@@ -136,16 +156,32 @@ async function preloadMedia(media) {
     });
 }
 
-// Modify the loadSlide function to ensure content is loaded before displaying
-async function loadSlide(index) {
+// Update loading progress
+function updateLoadingProgress() {
+    loadingProgress = (loadedSlides / totalSlides) * 100;
+    const progressBar = document.querySelector('.loading-progress');
+    if (progressBar) {
+        progressBar.style.width = `${loadingProgress}%`;
+    }
+    const progressText = document.querySelector('.loading-text');
+    if (progressText) {
+        progressText.textContent = `Loading gallery... ${Math.round(loadingProgress)}%`;
+    }
+}
+
+// Consolidated loadSlide function
+async function loadSlide(index, swiperWrapper) {
     const slide = swiperWrapper.querySelector(`[data-index="${index}"]`);
     if (slide && !slide.dataset.loaded) {
         try {
             const media = mediaFiles[index];
             const isVideo = getMediaType(media.src);
 
-            // Show loading placeholder
-            slide.innerHTML = '<div class="slide-placeholder">Loading...</div>';
+            // Show loading placeholder with progress
+            slide.innerHTML = `<div class="slide-placeholder">
+                <div class="loading-spinner"></div>
+                <div>Loading slide ${index + 1}/${totalSlides}...</div>
+            </div>`;
 
             // Start preloading
             const preloadPromise = preloadMedia(media);
@@ -161,6 +197,10 @@ async function loadSlide(index) {
             // Create and insert slide content
             slide.innerHTML = await createSlideElement(media);
             slide.dataset.loaded = 'true';
+            
+            // Update progress
+            loadedSlides++;
+            updateLoadingProgress();
 
             // If it's a video, prepare it
             if (isVideo === 'video') {
@@ -178,12 +218,33 @@ async function loadSlide(index) {
     return slide;
 }
 
+// Global variables
+let swiper = null;
+let mediaFiles = [];
+let loadingProgress = 0;
+let totalSlides = 0;
+let loadedSlides = 0;
+
+// Video format detection
+function supportsVideoFormat(format) {
+    const video = document.createElement('video');
+    return video.canPlayType(`video/${format}`) !== '';
+}
+
+// Check video support
+const videoSupport = {
+    mp4: supportsVideoFormat('mp4'),
+    webm: supportsVideoFormat('webm'),
+    ogg: supportsVideoFormat('ogg')
+};
+
 // Initialize Swiper
 async function initSwiper() {
     const loader = document.querySelector('.loader');
     
     try {
-        const mediaFiles = await getMediaFiles();
+        mediaFiles = await getMediaFiles();
+        totalSlides = mediaFiles.length;
         const swiperWrapper = document.querySelector('.swiper-wrapper');
 
         // Create placeholder slides for all items
@@ -195,39 +256,12 @@ async function initSwiper() {
             swiperWrapper.appendChild(slide);
         });
 
-        // Function to load a specific slide
-        async function loadSlide(index) {
-            const slide = swiperWrapper.querySelector(`[data-index="${index}"]`);
-            if (slide && !slide.dataset.loaded) {
-                try {
-                    const media = mediaFiles[index];
-                    const isVideo = getMediaType(media.src);
-
-                    if (isVideo === 'video') {
-                        // Videos load immediately without placeholder
-                        slide.innerHTML = await createSlideElement(media);
-                        slide.dataset.loaded = 'true';
-                    } else {
-                        // Images use lazy loading
-                        slide.innerHTML = '<div class="slide-placeholder">Loading...</div>';
-                        await preloadMedia(media);
-                        slide.innerHTML = await createSlideElement(media);
-                        slide.dataset.loaded = 'true';
-                    }
-                } catch (error) {
-                    console.error(`Error loading slide ${index}:`, error);
-                    slide.innerHTML = `<div class="error-message">Failed to load media</div>`;
-                }
-            }
-            return slide;
-        }
-
         // Load first slide immediately
-        await loadSlide(0);
+        await loadSlide(0, swiperWrapper);
         loader.classList.add('hidden');
 
         // Initialize Swiper
-        const swiper = new Swiper('.swiper', {
+        swiper = new Swiper('.swiper', {
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
@@ -272,8 +306,8 @@ async function initSwiper() {
 
                     // Preload next and previous slides
                     await Promise.all([
-                        loadSlide(nextIndex),
-                        loadSlide(prevIndex)
+                        loadSlide(nextIndex, swiperWrapper),
+                        loadSlide(prevIndex, swiperWrapper)
                     ]);
                 },
                 slideChangeTransitionEnd: function() {
@@ -384,10 +418,59 @@ async function initSwiper() {
     }
 }
 
+// Keyboard shortcuts
+function handleKeyboardShortcuts(event) {
+    if (!swiper) return;
+    
+    switch(event.code) {
+        case 'Space':
+            event.preventDefault();
+            if (swiper.autoplay.running) {
+                swiper.autoplay.stop();
+            } else {
+                swiper.autoplay.start();
+            }
+            break;
+        case 'Home':
+            event.preventDefault();
+            swiper.slideTo(0);
+            break;
+        case 'End':
+            event.preventDefault();
+            swiper.slideTo(mediaFiles.length - 1);
+            break;
+        case 'ArrowLeft':
+            event.preventDefault();
+            swiper.slidePrev();
+            break;
+        case 'ArrowRight':
+            event.preventDefault();
+            swiper.slideNext();
+            break;
+    }
+}
+
+// Performance monitoring
+function logPerformanceMetrics() {
+    if (performance.memory) {
+        console.log('Memory usage:', {
+            used: Math.round(performance.memory.usedJSHeapSize / 1024 / 1024) + 'MB',
+            total: Math.round(performance.memory.totalJSHeapSize / 1024 / 1024) + 'MB',
+            limit: Math.round(performance.memory.jsHeapSizeLimit / 1024 / 1024) + 'MB'
+        });
+    }
+}
+
 // Initialize when the page loads
 document.addEventListener('DOMContentLoaded', initSwiper);
 
-// Add window resize listener
+// Add event listeners
+document.addEventListener('keydown', handleKeyboardShortcuts);
 window.addEventListener('resize', () => {
-    swiper.update();
+    if (swiper) {
+        swiper.update();
+    }
 });
+
+// Log performance metrics every 30 seconds
+setInterval(logPerformanceMetrics, 30000);
