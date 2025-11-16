@@ -9,3 +9,8 @@ test*
 /hugo/
 slideshow/_media_removed.json
 slideshow/_media.json
+
+# Environment variables
+.env
+.env.local
+.env.*.local
