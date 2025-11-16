@@ -6,13 +6,17 @@ const TYPEWRITER_CONFIG = {
     pauseFor: 2000
 };
 
-const NOTION_TOKEN = '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';
+const NOTION_TOKEN = 'your_notion_token_here';
 const NOTION_BLOCK_ID = '2297e0b5c63440f883ea65aedc7611d1';
 
 // Use proxy server to avoid CORS issues
 // Set to true to use local proxy, false to try direct API (will fail due to CORS)
 const USE_PROXY = true;
-const PROXY_URL = 'http://localhost:3001';
+
+// Automatically detect environment: use localhost for local dev, or current origin for production
+const PROXY_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:3001'  // Local development
+    : window.location.origin;   // Production (e.g., Vercel deployment)
 
 // Helper function to format block ID (add dashes if needed)
 function formatBlockId(blockId) {
