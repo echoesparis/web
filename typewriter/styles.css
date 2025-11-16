@@ -8,12 +8,12 @@
     /* Typography */
     --base-size: 16px;
     
-    /* Colors */
-    --color-values: #ffffb3;
-    --color-expertise: #80b1d3;
-    --color-customer: #8dd3c7;
-    --color-impact: #fdb462;
-    --color-technology: #fccde5;
+    /* Colors with transparency */
+    --color-values: #ffffb380;
+    --color-expertise: #80b1d380;
+    --color-customer: #8dd3c780;
+    --color-impact: #fdb46280;
+    --color-technology: #fccde580;
 }
 
 /* Reset */
