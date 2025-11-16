@@ -6,10 +6,7 @@ const TYPEWRITER_CONFIG = {
     pauseFor: 2000
 };
 
-// Load from environment variables or use defaults (for local development)
-const NOTION_TOKEN = typeof process !== 'undefined' && process.env?.NOTION_TOKEN 
-    ? process.env.NOTION_TOKEN 
-    : ''; // Will be set via proxy server
+const NOTION_TOKEN = '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';
 const NOTION_BLOCK_ID = '2297e0b5c63440f883ea65aedc7611d1';
 
 // Use proxy server to avoid CORS issues
