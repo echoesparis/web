@@ -6,8 +6,12 @@ const TYPEWRITER_CONFIG = {
     pauseFor: 2000
 };
 
-const NOTION_TOKEN = 'your_notion_token_here';
+// Notion Block ID to fetch content from
+// Get this from your Notion page URL (the part after the last / and before any ?)
 const NOTION_BLOCK_ID = '2297e0b5c63440f883ea65aedc7611d1';
+
+// Note: NOTION_TOKEN is not needed here when USE_PROXY=true (default)
+// The proxy server handles authentication using the token from .env file
 
 // Use proxy server to avoid CORS issues
 // Set to true to use local proxy, false to try direct API (will fail due to CORS)
@@ -47,14 +51,15 @@ async function loadContent() {
                 }
             };
         } else {
-            // Direct API call (will fail due to CORS)
+            // Direct API call (will fail due to CORS - not recommended)
+            // This path requires NOTION_TOKEN but will be blocked by CORS policy
             apiUrl = `https://api.notion.com/v1/blocks/${formattedBlockId}/children`;
             fetchOptions = {
                 method: 'GET',
                 headers: {
-                    'Authorization': `Bearer ${NOTION_TOKEN}`,
                     'Notion-Version': '2022-06-28',
                     'Content-Type': 'application/json'
+                    // Note: Authorization header cannot be set from browser due to CORS
                 }
             };
         }
