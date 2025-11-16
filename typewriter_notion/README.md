@@ -60,7 +60,10 @@ Open `index.html` in your browser. The typewriter will automatically fetch conte
 
 Edit `script.js` to change:
 - `NOTION_BLOCK_ID`: The Notion block/page ID to fetch content from
-- `PROXY_URL`: The proxy server URL (default: `http://localhost:3001`)
+  - Get this from your Notion page URL (the part after the last `/` and before any `?`)
+  - Example: `https://notion.so/page/2297e0b5c63440f883ea65aedc7611d1` → Block ID is `2297e0b5c63440f883ea65aedc7611d1`
+- `PROXY_URL`: Automatically detected (localhost for dev, current origin for production)
+- `USE_PROXY`: Set to `false` only if you want to test direct API calls (will fail due to CORS)
 
 ## Deployment
 

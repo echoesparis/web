@@ -1,6 +1,7 @@
 // Vercel serverless function for Notion API proxy
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
+// Validate token is set
 if (!NOTION_TOKEN) {
     console.error('ERROR: NOTION_TOKEN environment variable is not set');
 }
@@ -30,6 +31,13 @@ export default async function handler(req, res) {
     
     if (!blockId) {
         return res.status(400).json({ error: 'Block ID required' });
+    }
+    
+    // Validate token before making request
+    if (!NOTION_TOKEN) {
+        return res.status(500).json({ 
+            error: 'NOTION_TOKEN environment variable is not configured. Please set it in Vercel project settings.' 
+        });
     }
     
     const formattedBlockId = formatBlockId(blockId);
