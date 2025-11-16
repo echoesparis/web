@@ -4,7 +4,7 @@ const https = require('https');
 const url = require('url');
 
 const PORT = 3001;
-const NOTION_TOKEN = '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';
+const NOTION_TOKEN = process.env.NOTION_TOKEN || '';
 
 const server = http.createServer((req, res) => {
     // Enable CORS
