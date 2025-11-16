@@ -15,7 +15,7 @@ Copy this template and replace with your actual values:
 ```env
 # Notion API Configuration
 NOTION_TOKEN=your_notion_token_here
-NOTION_BLOCK_ID=2297e0b5c63440f883ea65aedc7611d1
+NOTION_BLOCK_ID=your_block_id_here
 ```
 
 ### Step 3: Get your Notion token

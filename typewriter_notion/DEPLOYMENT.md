@@ -69,8 +69,7 @@ Convert the proxy to a serverless function that can be deployed alongside your f
 1. Create `api/notion.js` in your project:
 ```javascript
 // api/notion.js
-const https = require('https');
-const NOTION_TOKEN = 'process.env.NOTION_TOKEN';
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
 
 export default async function handler(req, res) {
   // Enable CORS
