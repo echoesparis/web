@@ -1,10 +1,17 @@
 // Simple proxy server for Notion API to handle CORS
+require('dotenv').config();
 const http = require('http');
 const https = require('https');
 const url = require('url');
 
-const PORT = 3001;
-const NOTION_TOKEN = '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';
+const PORT = process.env.PORT || 3001;
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+
+if (!NOTION_TOKEN) {
+    console.error('ERROR: NOTION_TOKEN is not set in .env file');
+    console.error('Please create a .env file with NOTION_TOKEN=your_token');
+    process.exit(1);
+}
 
 const server = http.createServer((req, res) => {
     // Enable CORS
