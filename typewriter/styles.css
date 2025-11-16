@@ -195,3 +195,19 @@ section {
     background-color: rgba(55, 53, 47, 0.08);
 }
 
+/* Highlight class for Notion colored text */
+.highlight {
+    text-decoration: underline;
+}
+
+/* Notion highlight color classes */
+.highlight-gray { text-decoration-color: #E9ECEF; }
+.highlight-brown { text-decoration-color: #E9D5CF; }
+.highlight-orange { text-decoration-color: #FADFCA; }
+.highlight-yellow { text-decoration-color: #FBF3DB; }
+.highlight-green { text-decoration-color: #DDEDEA; }
+.highlight-blue { text-decoration-color: #DDEBF1; }
+.highlight-purple { text-decoration-color: #EAE4F2; }
+.highlight-pink { text-decoration-color: #F4DFEB; }
+.highlight-red { text-decoration-color: #FFE2DD; }
+

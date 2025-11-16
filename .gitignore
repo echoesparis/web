@@ -1,10 +1,11 @@
+# Local Netlify folder
+.netlify
+typewriter/text.md
+wip/3d-graph/download-deps.ps1
 
-wip/mapbox/
-wip/three-json/examples/
-wip/three-json/node_modules/
-wip/three-json/src/
-wip/three-json/template/
-wip/three-json/build.js
-wip/three-json/package-lock.json
-wip/three-json/package.json
-wip/three-json/download-libs.js
+# Test files
+test*
+
+/hugo/
+slideshow/_media_removed.json
+slideshow/_media.json
