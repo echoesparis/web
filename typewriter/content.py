@@ -1,13 +1,9 @@
 import requests
 import json
 import os
-from dotenv import load_dotenv
 
-# Load environment variables from .env file
-load_dotenv()
-
-NOTION_TOKEN = os.getenv('NOTION_TOKEN', '')
-NOTION_PAGE_ID = os.getenv('NOTION_PAGE_ID', '1a1f3868d02e800d9e24ffab2ec974db')
+NOTION_TOKEN = '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'
+NOTION_PAGE_ID = '1a1f3868d02e800d9e24ffab2ec974db'
 TEST_MODE = False  # Global test mode flag
 
 def fetch_notion_content():
