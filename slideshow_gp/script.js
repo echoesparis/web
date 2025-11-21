@@ -177,11 +177,20 @@ async function loadSlide(index, swiperWrapper) {
             const media = mediaFiles[index];
             const isVideo = getMediaType(media.src);
 
-            // Show loading placeholder with progress
-            slide.innerHTML = `<div class="slide-placeholder">
-                <div class="loading-spinner"></div>
-                <div>Loading slide ${index + 1}/${totalSlides}...</div>
-            </div>`;
+            // Show loading placeholder only if main loader is hidden
+            const mainLoader = document.querySelector('.loader');
+            const isMainLoaderVisible = mainLoader && !mainLoader.classList.contains('hidden') && mainLoader.style.display !== 'none';
+            
+            // Only show per-slide loader if main loader is not visible
+            if (!isMainLoaderVisible) {
+                slide.innerHTML = `<div class="slide-placeholder" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding-top: 0;">
+                    <div class="loading-spinner"></div>
+                    <div>Loading slide ${index + 1}/${totalSlides}...</div>
+                </div>`;
+            } else {
+                // Just show empty placeholder if main loader is visible
+                slide.innerHTML = '<div class="slide-placeholder" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding-top: 0;"></div>';
+            }
 
             // Start preloading
             const preloadPromise = preloadMedia(media);
@@ -242,6 +251,12 @@ const videoSupport = {
 async function initSwiper() {
     const loader = document.querySelector('.loader');
     
+    // Ensure loader is visible initially
+    if (loader) {
+        loader.style.display = 'flex';
+        loader.classList.remove('hidden');
+    }
+    
     try {
         mediaFiles = await getMediaFiles();
         totalSlides = mediaFiles.length;
@@ -252,13 +267,18 @@ async function initSwiper() {
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
             slide.setAttribute('data-index', index);
-            slide.innerHTML = '<div class="slide-placeholder" style="display: flex; justify-content: center; align-items: center; height: 100%;"></div>';
+            slide.innerHTML = '<div class="slide-placeholder" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; padding-top: 0;"></div>';
             swiperWrapper.appendChild(slide);
         });
 
         // Load first slide immediately
         await loadSlide(0, swiperWrapper);
-        loader.classList.add('hidden');
+        
+        // Hide loader after first slide loads
+        if (loader) {
+            loader.style.display = 'none';
+            loader.classList.add('hidden');
+        }
 
         // Initialize Swiper
         swiper = new Swiper('.swiper', {

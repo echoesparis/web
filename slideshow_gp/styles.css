@@ -28,15 +28,15 @@ body.embedded {
     overflow: hidden;
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    padding-top: 0; /* Align to top */
 }
 
-/* Swiper modifications */
 .swiper {
     width: 100%;
-    height: 100vh; /* Set explicit height */
+    height: 100vh; /* Full height, aligned to top */
     display: flex;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .swiper-slide {
@@ -44,18 +44,19 @@ body.embedded {
     transition: transform 0.1s;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Center slides vertically within swiper */
     align-items: center;
     overflow: hidden;
+    padding-top: 0;
 }
 
 .slide-content {
-    max-height: 100%; /* Ensure content doesn't overflow */
+    max-height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Center content vertically */
     align-items: center;
-    padding: 20px; /* Add some padding */
+    padding: 20px;
 }
 
 /* Media elements */
@@ -193,6 +194,8 @@ body.embedded {
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    background: var(--bg-color); /* Add background */
+    pointer-events: none; /* Prevent interaction */
 }
 
 .loader-spinner {
@@ -211,12 +214,15 @@ body.embedded {
 }
 
 @keyframes spin {
+    0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
 
 /* Hide loader when content is loaded */
 .loader.hidden {
-    display: none;
+    display: none !important;
+    opacity: 0;
+    visibility: hidden;
 }
 
 /* Loading progress bar */
@@ -299,10 +305,14 @@ body.embedded {
     margin-bottom: 10px;
 }
 
-/* Add hover effect for clickable images */
-.swiper-slide a img,
-.swiper-slide a video {
-    transition: all 0.3s ease;
+.swiper-slide img,
+.swiper-slide video {
+    max-height: 80vh; /* Reduced from 90vh to account for top space */
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    margin-top: 0; /* Ensure no extra margin */
 }
 
 .swiper-slide a:hover img,
@@ -367,6 +377,18 @@ body.embedded {
 
 /* Mobile-specific improvements */
 @media (max-width: 768px) {
+    .container {
+        padding-top: 0; /* Align to top on mobile */
+    }
+    
+    .swiper {
+        height: 100vh; /* Full height on mobile */
+    }
+    
+    .swiper-slide {
+        padding-top: 0; /* Align to top on mobile */
+    }
+    
     .swiper-pagination {
         bottom: 25px !important;
         padding: 0 20px;
