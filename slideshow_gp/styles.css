@@ -2,9 +2,21 @@
 :root {
     --text-color: currentColor;
     --bg-color: transparent;
-    --accent-color: currentColor;
     --shadow-color: hsla(0, 0%, var(--l, 0%), 0.2);
     --hover-glow: hsla(60, 100%, var(--l, 70%), 0.4);
+    
+    /* Try Super.site variables first, then system preference fallback */
+    --caption-color: var(--super-text-muted, #999);
+    --ui-color: var(--super-text-muted, #666);
+    --accent-color: var(--super-accent, rgba(255, 255, 180, 0.4));
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        --caption-color: var(--super-text-muted, #555);
+        --ui-color: var(--super-text-muted, #888);
+        --accent-color: var(--super-accent, rgba(180, 150, 50, 0.6));
+    }
 }
 
 /* Base styles */
@@ -62,8 +74,8 @@ body.embedded {
 /* Media elements */
 .swiper-slide img,
 .swiper-slide video {
-    max-height: 90vh; /* Account for caption space */
-    max-width: 100%;
+    max-height: 75vh; /* Reduced from 80vh */
+    max-width: min(100%, 1200px); /* Prevent oversized images */
     width: auto;
     height: auto;
     object-fit: contain;
@@ -80,7 +92,7 @@ body.embedded {
 }
 
 .swiper-pagination-bullet {
-    background: #666;
+    background: var(--ui-color);
     opacity: 0.5;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -90,7 +102,7 @@ body.embedded {
 
 .swiper-pagination-bullet-active {
     opacity: 1;
-    background: #ffffb369;
+    background: var(--accent-color);
     transform: scale(1.2);
 }
 
@@ -105,11 +117,11 @@ body.embedded {
     z-index: 2;
 }
 
-/* Adjust adjacent slides */
+/* Adjust adjacent slides - subtler effect */
 .swiper-slide-prev,
 .swiper-slide-next {
-    transform: scale(0.7);
-    opacity: 0.2;
+    transform: scale(0.85);
+    opacity: 0.4;
 }
 
 
@@ -119,10 +131,12 @@ body.embedded {
     position: relative;
     bottom: -10px;
     text-align: center;
-    color: #666;
-    font-size: 14px;
+    color: var(--caption-color);
+    font-size: 16px;
     font-family: 'Roboto Condensed', sans-serif;
-    padding: 5px;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    padding: 10px 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,14 +215,14 @@ body.embedded {
 .loader-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #666;
+    border: 3px solid var(--ui-color);
     border-radius: 50%;
-    border-top-color: #666;
+    border-top-color: var(--accent-color);
     animation: spin 1s linear infinite;
 }
 
 .loader-text {
-    color: #666;
+    color: var(--ui-color);
     margin-top: 10px;
     font-family: 'Roboto Condensed', sans-serif;
 }
@@ -241,7 +255,7 @@ body.embedded {
 
 .loading-progress {
     height: 100%;
-    background: linear-gradient(90deg, #ffffb369, #ffd700);
+    background: var(--accent-color);
     border-radius: 2px;
     transition: width 0.3s ease;
     width: 0%;
@@ -255,12 +269,12 @@ body.embedded {
     height: 200px;
     background: rgba(0, 0, 0, 0.1);
     border-radius: 8px;
-    border: 2px dashed #666;
+    border: 2px dashed var(--ui-color);
 }
 
 .video-placeholder {
     text-align: center;
-    color: #666;
+    color: var(--ui-color);
 }
 
 .video-icon {
@@ -273,7 +287,7 @@ body.embedded {
     display: inline-block;
     margin-top: 10px;
     padding: 8px 16px;
-    background: #ffffb369;
+    background: var(--accent-color);
     color: #333;
     text-decoration: none;
     border-radius: 4px;
@@ -281,7 +295,8 @@ body.embedded {
 }
 
 .video-download:hover {
-    background: #ffd700;
+    background: var(--accent-color);
+    filter: brightness(1.2);
 }
 
 /* Improved slide placeholder */
@@ -291,24 +306,24 @@ body.embedded {
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: #666;
+    color: var(--ui-color);
     font-family: 'Roboto Condensed', sans-serif;
 }
 
 .loading-spinner {
     width: 20px;
     height: 20px;
-    border: 2px solid #666;
+    border: 2px solid var(--ui-color);
     border-radius: 50%;
-    border-top-color: #ffffb369;
+    border-top-color: var(--accent-color);
     animation: spin 1s linear infinite;
     margin-bottom: 10px;
 }
 
 .swiper-slide img,
 .swiper-slide video {
-    max-height: 80vh; /* Reduced from 90vh to account for top space */
-    max-width: 100%;
+    max-height: 75vh; /* Reduced from 80vh */
+    max-width: min(100%, 1200px); /* Prevent oversized images */
     width: auto;
     height: auto;
     object-fit: contain;
@@ -319,7 +334,7 @@ body.embedded {
 .swiper-slide a:hover video {
     transform: scale(1.02); /* Subtle zoom on hover */
     /* Combine both shadows */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px #ffffb369; /* Base shadow + glow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px var(--accent-color); /* Base shadow + glow effect */
 }
 
 
@@ -344,7 +359,7 @@ body.embedded {
 
 .swiper-slide a:hover::after {
     opacity: 1;
-    background: #ffffb3ba;
+    background: var(--accent-color);
 }
 
 /* Add this new rule to hide the arrow on caption links */
@@ -353,7 +368,7 @@ body.embedded {
 }
 
 .error-message {
-    color: #666;
+    color: var(--ui-color);
     text-align: center;
     padding: 20px;
 }
@@ -401,8 +416,11 @@ body.embedded {
     }
     
     .slide-caption {
-        font-size: 12px;
-        padding: 3px;
+        font-size: 13px; /* Slightly larger than previous 12px */
+        padding: 8px 16px;
+        background: rgba(0, 0, 0, 0.5); /* Add background for legibility */
+        border-radius: 4px;
+        margin-top: 10px;
     }
     
     .loading-progress-container {
