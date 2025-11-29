@@ -74,8 +74,8 @@ body.embedded {
 /* Media elements */
 .swiper-slide img,
 .swiper-slide video {
-    max-height: 75vh; /* Reduced from 80vh */
-    max-width: min(100%, 1200px); /* Prevent oversized images */
+    max-height: 90vh; /* Account for caption space */
+    max-width: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -117,11 +117,11 @@ body.embedded {
     z-index: 2;
 }
 
-/* Adjust adjacent slides - subtler effect */
+/* Adjust adjacent slides */
 .swiper-slide-prev,
 .swiper-slide-next {
-    transform: scale(0.85);
-    opacity: 0.4;
+    transform: scale(0.7);
+    opacity: 0.2;
 }
 
 
@@ -322,8 +322,8 @@ body.embedded {
 
 .swiper-slide img,
 .swiper-slide video {
-    max-height: 75vh; /* Reduced from 80vh */
-    max-width: min(100%, 1200px); /* Prevent oversized images */
+    max-height: 80vh; /* Reduced from 90vh to account for top space */
+    max-width: 100%;
     width: auto;
     height: auto;
     object-fit: contain;
