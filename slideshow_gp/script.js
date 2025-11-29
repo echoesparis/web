@@ -288,14 +288,14 @@ async function initSwiper() {
             slidesPerView: 'auto',
             spaceBetween: 0,
             coverflowEffect: {
-                rotate: 30,
+                rotate: 15, // Down from 30 - calmer effect
                 stretch: 0,
-                depth: 100,
-                modifier: 2,
+                depth: 50, // Down from 100
+                modifier: 1.5, // Down from 2
                 slideShadows: false,
             },
             autoplay: {
-                delay: 2500,
+                delay: 4000, // Up from 2500 - slower for reading captions
                 disableOnInteraction: false,
                 pauseOnMouseEnter: true,
                 waitForTransition: true,
@@ -340,7 +340,7 @@ async function initSwiper() {
                         this.params.autoplay.delay = video.duration * 1000 || 2500;
                     } else {
                         // For non-video slides, use default delay
-                        this.params.autoplay.delay = 2500;
+                        this.params.autoplay.delay = 4000;
                     }
                 },
                 beforeSlideChangeStart: async function() {
