@@ -1,7 +1,4 @@
-# Maiastra
-
-
-## Notion Components
+# Notion Components
 
 Embed Notion content as interactive web components.
 
