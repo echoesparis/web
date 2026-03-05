@@ -96,15 +96,19 @@ async function createSlideElement(media) {
                 : tag;
             const tagUrl = tag.toLowerCase()
                 .replace(/\s+/g, '-')
-                .replace(/[()]/g, '');
+                .replace(/[()'']/g, '');
             return `<span class="tag-link"><a href="https://echoes.paris/tags/${tagUrl}" target="_parent">#${displayText}</a></span>`;
         }).join(' ') : '';
+
+        const yearHtml = media.date ? `<div class="caption-year">${media.date.slice(0, 4)}</div>` : '';
 
         return `
             <div class="slide-content" style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%;">
                 ${content}
                 <div class="slide-caption">
-                    <span class="caption-text">${media.caption || ' '} ${tagsHtml}</span>
+                    ${media.caption ? `<div class="caption-text">${media.caption}</div>` : ''}
+                    ${tagsHtml ? `<div class="caption-tags">${tagsHtml}</div>` : ''}
+                    ${yearHtml}
                 </div>
             </div>
         `;
@@ -287,9 +291,6 @@ async function initSwiper() {
                 el: '.swiper-pagination',
                 clickable: true,
                 dynamicBullets: true,
-                renderBullet: function (index, className) {
-                    return `<span class="${className}"></span>`;
-                }
             },
             keyboard: {
                 enabled: true,
@@ -304,8 +305,9 @@ async function initSwiper() {
                     const nextIndex = (currentIndex + 1) % mediaFiles.length;
                     const prevIndex = (currentIndex - 1 + mediaFiles.length) % mediaFiles.length;
 
-                    // Preload next and previous slides
+                    // Load current slide (needed for bullet clicks to distant slides) + adjacent
                     await Promise.all([
+                        loadSlide(currentIndex, swiperWrapper),
                         loadSlide(nextIndex, swiperWrapper),
                         loadSlide(prevIndex, swiperWrapper)
                     ]);
@@ -411,6 +413,97 @@ async function initSwiper() {
             centerInsufficientSlides: true,
             watchOverflow: true,
         });
+
+        // Thumbnail preview on pagination bullet hover
+        const paginationEl = document.querySelector('.swiper-pagination');
+        if (paginationEl) {
+            let activeTooltip = null;
+            let tooltipSuppressed = false;
+            const thumbCache = {};
+
+            function removeTooltip() {
+                if (activeTooltip) {
+                    activeTooltip.remove();
+                    activeTooltip = null;
+                }
+            }
+
+            function suppressTooltip() {
+                removeTooltip();
+                tooltipSuppressed = true;
+                setTimeout(() => { tooltipSuppressed = false; }, 300);
+            }
+
+            // Resolve bullet index at hover time using Swiper's pagination bullets array
+            function getBulletIndex(bullet) {
+                const bullets = swiper.pagination.bullets;
+                if (!bullets) return -1;
+                for (let i = 0; i < bullets.length; i++) {
+                    if (bullets[i] === bullet) return i;
+                }
+                return -1;
+            }
+
+            paginationEl.addEventListener('mouseover', function (e) {
+                if (tooltipSuppressed) return;
+
+                const bullet = e.target.closest('.swiper-pagination-bullet');
+                if (!bullet) { removeTooltip(); return; }
+
+                const idx = getBulletIndex(bullet);
+                if (idx < 0 || !mediaFiles[idx]) return;
+
+                removeTooltip();
+
+                const media = mediaFiles[idx];
+                const isVideo = getMediaType(media.src) === 'video';
+
+                const tooltip = document.createElement('div');
+                tooltip.className = 'bullet-thumbnail';
+
+                // Cache thumbnail elements — use img for images, icon placeholder for videos
+                if (!thumbCache[idx]) {
+                    thumbCache[idx] = isVideo
+                        ? `<div style="display:flex;align-items:center;justify-content:center;width:100%;height:100%;color:#888;font-size:32px;">&#9654;</div>`
+                        : `<img src="${media.src}" alt="">`;
+                }
+                tooltip.innerHTML = thumbCache[idx];
+
+                // Position tooltip with viewport clamping
+                const bulletRect = bullet.getBoundingClientRect();
+                const halfTooltip = 80; // 160px / 2
+                const rawLeft = bulletRect.left + bulletRect.width / 2;
+                const clampedLeft = Math.max(halfTooltip, Math.min(rawLeft, window.innerWidth - halfTooltip));
+                tooltip.style.left = clampedLeft + 'px';
+                tooltip.style.top = bulletRect.top + 'px';
+                document.body.appendChild(tooltip);
+                activeTooltip = tooltip;
+
+                requestAnimationFrame(() => {
+                    if (activeTooltip === tooltip) tooltip.classList.add('visible');
+                });
+            });
+
+            paginationEl.addEventListener('mouseleave', removeTooltip);
+            paginationEl.addEventListener('click', suppressTooltip);
+
+            // Suppress tooltip on slide change to prevent re-creation from bullet repositioning
+            swiper.on('slideChange', suppressTooltip);
+        }
+
+        // Navigate to a specific slide via ?slide= query parameter
+        const params = new URLSearchParams(window.location.search);
+        const slideParam = params.get('slide');
+        if (slideParam) {
+            const targetIdx = mediaFiles.findIndex(m =>
+                m.src.replace('src/', '') === slideParam ||
+                (m.caption && m.caption.toLowerCase() === slideParam.toLowerCase())
+            );
+            if (targetIdx >= 0) {
+                await loadSlide(targetIdx, swiperWrapper);
+                swiper.slideTo(targetIdx, 0);
+            }
+        }
 
     } catch (error) {
         console.error('Failed to initialize gallery:', error);

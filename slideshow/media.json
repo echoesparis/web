@@ -1,210 +1,400 @@
 [
     {
-      "src": "000_KGs_500.jpg",
-      "url": "",
-      "caption": "information architecture",
-      "tags": ["knowledge graphs (KGs)"]
+        "src": "2026-03-03 Dev.png",
+        "url": "",
+        "caption": "knowledge graphs for software development",
+        "tags": [
+            "vibe coding",
+            "programming",
+            "don't repeat yourself (DRY)"
+        ],
+        "date": "2025-12"
     },
     {
-      "src": "090-01_500.jpg",
-      "url": "",
-      "caption": "large scale wind analysis",
-      "tags": ["computational wind engineering (CWE)","computational fluid dynamics (CFD)","outdoor thermal comfort (OTC)","cloud computing"]
+        "src": "os_KGs_500.jpg",
+        "url": "",
+        "caption": "knowledge graphs for semantic search and information architecture dashboard",
+        "tags": [
+            "knowledge graphs (KGs)"
+        ],
+        "date": "2024-12"
     },
     {
-      "src": "h147_02_500.jpg",
-      "url": "https://echoes.paris/cases/climate-ribbon",
-      "caption": "",
-      "tags":["datascape", "solar design","solar access","mean solar vectors (MSV)"]
+        "src": "090-01_500.jpg",
+        "url": "",
+        "caption": "large scale wind analysis",
+        "tags": [
+            "computational wind engineering (CWE)",
+            "computational fluid dynamics (CFD)",
+            "outdoor thermal comfort (OTC)",
+            "cloud computing"
+        ],
+        "date": "2023-10"
     },
     {
-      "src": "h100_SP_24_500.png",
-      "url": "",
-      "caption": "",
-      "tags": ["complex structures","computational engineering","structural engineering","structural optimization","spaceframe","freeform","daylighting"]
+        "src": "h147_02_500.jpg",
+        "url": "https://echoes.paris/cases/climate-ribbon",
+        "caption": "performance-driven design",
+        "tags": [
+            "datascape",
+            "solar design",
+            "solar access",
+            "mean solar vector (MSV)"
+        ],
+        "date": "2013-05"
     },
     {
-      "src": "086_02_500.gif",
-      "url": "",
-      "caption": "",
-      "tags": ["pedestrian wind comfort (PWC)","computational wind engineering (CWE)","computational fluid dynamics (CFD)"]
-    },
-
-    {
-      "src": "3dtiles_01_500.mp4",
-      "url": "",
-      "caption": "",
-      "tags": ["programming","3D tiles"]
-    },
-    {
-      "src": "080-02_500.jpg",
-      "url": "",
-      "caption": "",
-      "tags": ["parametric modelling","parametric design","dynamic relaxation (DR)"]
+        "src": "h100_SP_24_500.png",
+        "url": "",
+        "caption": "",
+        "tags": [
+            "complex structures",
+            "computational engineering",
+            "structural engineering",
+            "structural optimization",
+            "space frame",
+            "freeform",
+            "daylighting"
+        ],
+        "date": "2012-03"
     },
     {
-      "src": "063_05_500.mp4",
-      "url": "",
-      "caption": "",
-      "tags": ["gridshell","form-finding","timber structures","timber engineering","active bending", "lightweight structures"]
+        "src": "086_02_500.gif",
+        "url": "",
+        "caption": "computational wind engineering for pedestrian wind comfort analysis",
+        "tags": [
+            "pedestrian wind comfort (PWC)",
+            "computational wind engineering (CWE)",
+            "computational fluid dynamics (CFD)"
+        ],
+        "date": "2024-07"
     },
     {
-      "src": "090-03_500.jpg",
-      "url": "",
-      "caption": "computational",
-      "tags": ["landscape"]
+        "src": "3dtiles_01_500.mp4",
+        "url": "",
+        "caption": "Python/Grasshopper integration : Google 3D Tiles streaming",
+        "tags": [
+            "programming",
+            "3D tiles"
+        ],
+        "date": "2024-12"
     },
     {
-      "src": "033-11_500.jpg",
-      "url": "",
-      "caption": "",
-      "tags": ["structural design","ornament","shell","crossing"]
+        "src": "080-02_500.jpg",
+        "url": "",
+        "caption": "parametric modelling of large-scale structures",
+        "tags": [
+            "parametric modelling",
+            "parametric design",
+            "dynamic relaxation (DR)"
+        ],
+        "date": "2023-03"
     },
     {
-      "src": "087-01_500.jpg",
-      "url": "",
-      "caption": "",
-      "tags": ["urban shading"]
+        "src": "063_05_500.mp4",
+        "url": "",
+        "caption": "ekilaya gridshel catalogue",
+        "tags": [
+            "gridshell",
+            "form-finding",
+            "timber structures",
+            "timber engineering",
+            "active bending",
+            "lightweight structures"
+        ],
+        "date": "2020-06"
     },
     {
-      "src": "083-01_500.gif",
-      "url": "",
-      "caption": "",
-      "tags": ["art investigations","3D scanning","photogrammetry"]
+        "src": "090-03_500.jpg",
+        "url": "",
+        "caption": "computational landscapes generation",
+        "tags": [
+            "landscape"
+        ],
+        "date": "2023-10"
     },
     {
-      "src": "080-01_500.gif",
-      "url": "",
-      "caption": "",
-      "tags": ["parametric modelling","parametric design","dynamic relaxation (DR)"]
+        "src": "033-11_500.jpg",
+        "url": "",
+        "caption": "footbridge design in Saudi Arabia",
+        "tags": [
+            "structural design",
+            "ornament",
+            "shell",
+            "crossings"
+        ],
+        "date": "2018-03"
     },
     {
-      "src": "074_Ambiantal clustering_100_500.png",
-      "url": "https://echoes.paris/cases/ctvd",
-      "caption": "ambiances clustering to define scenographic sequences",
-      "tags": ["scenography","cluster analysis","k-means clustering","cloud computing"]
+        "src": "087-01_500.jpg",
+        "url": "",
+        "caption": "vegetal shading systems",
+        "tags": [
+            "urban shading"
+        ],
+        "date": "2023-09"
     },
     {
-      "src": "024_07_500.jpg",
-      "url": "https://echoes.paris/cases/al-janoub-stadium",
-      "tags": ["building information modeling (BIM)","parametric detailling","digital manufacturing"]
+        "src": "083-01_500.gif",
+        "url": "",
+        "caption": "art investigations through 3D scanning and photogrammetry",
+        "tags": [
+            "art investigations",
+            "3D scanning",
+            "photogrammetry"
+        ],
+        "date": "2024-01"
     },
     {
-      "src": "urbanytics_001_500px.mp4",
-      "url": "https://echoes.paris/scripts/massing-indicators",
-      "caption": "massing indicators"
+        "src": "080-01_500.gif",
+        "url": "",
+        "caption": "structural modelling",
+        "tags": [
+            "parametric modelling",
+            "parametric design",
+            "dynamic relaxation (DR)"
+        ],
+        "date": "2023-04"
     },
     {
-      "src": "NVF_dm_03_500.jpg",
-      "url": "https://echoes.paris/scripts/view",
-      "caption": "visual access to nature",
-      "tags": ["visibility","Nature View Factor (NVF)"]
+        "src": "074_Ambiantal clustering_100_500.png",
+        "url": "https://echoes.paris/cases/ctvd",
+        "caption": "ambiances clustering to define scenographic sequences",
+        "tags": [
+            "scenography",
+            "cluster analysis",
+            "k-means clustering",
+            "cloud computing"
+        ],
+        "date": "2021-05"
     },
     {
-      "src": "shells_bioshell_02_500.gif",
-      "url": "https://echoes.paris/cases/bioshell",
-      "caption": "structural biomaterials - hybride straw bale and timber grishell"
+        "src": "024_07_500.jpg",
+        "url": "https://echoes.paris/cases/al-janoub-stadium",
+        "caption": "design to production",
+        "tags": [
+            "building information modeling (BIM)",
+            "parametric detailling",
+            "digital manufacturing"
+        ],
+        "date": "2018-06"
     },
     {
-      "src": "Massing Heuristics_04.mp4",
-      "url": "https://echoes.paris/posts/typology-aware-generative-masterplanning",
-      "caption": "",
-      "tags": ["procedural modelling","dynamic masterplanning","urban typologies"]
+        "src": "urbanytics_001_500px.mp4",
+        "url": "https://echoes.paris/scripts/massing-indicators",
+        "caption": "massing indicators",
+        "tags": [
+            "3D tiles"
+        ],
+        "date": "2021-03"
     },
     {
-      "src": "080-03_500.jpg",
-      "url": "",
-      "caption": "advanced geometries",
-      "tags": ["parametric modelling"]
+        "src": "NVF_dm_03_500.jpg",
+        "url": "https://echoes.paris/scripts/view",
+        "caption": "visual access to nature",
+        "tags": [
+            "visibility",
+            "Nature View Factor (NVF)"
+        ],
+        "date": "2021-03"
     },
     {
-      "src": "h147_SP_Solar Data Computation _500.mp4",
-      "url": "https://echoes.paris/cases/climate-ribbon",
-      "caption": "Climate Ribbon™, Miami. Solar data computation process",
-      "tags": ["performance-driven design", "solar design"]
+        "src": "shells_bioshell_02_500.gif",
+        "url": "https://echoes.paris/cases/bioshell",
+        "caption": "hybrid straw bale and timber gridshell",
+        "tags": [
+            "low-tech",
+            "low-carbon",
+            "gridshell",
+            "structural straw"
+        ],
+        "date": "2021-06"
     },
     {
-      "src": "h147_SP_04_500.jpg",
-      "url": "https://echoes.paris/cases/climate-ribbon",
-      "caption": "Climate Ribbon™, Miami.",
-      "tags": ["parametric design","solar shading systems","non-standard","component instanciation"]
+        "src": "Massing Heuristics_04.mp4",
+        "url": "https://echoes.paris/posts/typology-aware-generative-masterplanning",
+        "caption": "dynamic urban massing",
+        "tags": [
+            "procedural modelling",
+            "dynamic masterplanning",
+            "urban typologies"
+        ],
+        "date": "2019-06"
     },
     {
-      "src": "050- VO_500.png",
-      "url": "https://echoes.paris/cases/paris-2024-olympic-village",
-      "caption": "Paris 2024 bioclimatic studies"
+        "src": "080-03_500.jpg",
+        "url": "",
+        "caption": "advanced geometries",
+        "tags": [
+            "parametric modelling"
+        ],
+        "date": "2023-04"
     },
     {
-      "src": "T_surf_500.gif",
-      "url": "https://echoes.paris/scripts/surface-temperature",
-      "caption": "surface temperature modelling",
-      "tags": ["urban heat island (UHI)","outdoor thermal comfort (OTC)"]
+        "src": "h147_SP_Solar Data Computation _500.mp4",
+        "url": "https://echoes.paris/cases/climate-ribbon",
+        "caption": "Climate Ribbon™, Miami. Solar data computation process",
+        "tags": [
+            "performance-driven design",
+            "solar design"
+        ],
+        "date": "2013-05"
     },
     {
-      "src": "shells_form_kagome_00_500.mp4",
-      "url": "https://echoes.paris/scripts/shells-structural-form-finding",
-      "tags": ["gridshell","form-finding","timber structures","timber engineering","active bending", "lightweight structures"]
+        "src": "h147_SP_04_500.jpg",
+        "url": "https://echoes.paris/cases/climate-ribbon",
+        "caption": "Climate Ribbon™, Miami.",
+        "tags": [
+            "parametric design",
+            "solar shading systems",
+            "non-standard",
+            "component instanciation"
+        ],
+        "date": "2014-04"
     },
     {
-      "src": "023_01_500.jpg",
-      "url": "https://echoes.paris/cases/henri-iv-bridge-building",
-      "caption": "reinventing cities",
-      "tags": ["structural design","architectural design","crossings"]
+        "src": "050- VO_500.png",
+        "url": "https://echoes.paris/cases/paris-2024-olympic-village",
+        "caption": "Paris 2024 bioclimatic studies",
+        "date": "2019-10"
     },
     {
-      "src": "000_solar massing automata_02_500.jpg",
-      "url": "https://echoes.paris/scripts/urbsolar-massing-automatagh",
-      "caption": "solar massing automata",
-      "tags": ["cellular automata (CA)","solar design"]
+        "src": "ee_Surface Temperature Analysis_500.gif",
+        "url": "https://echoes.paris/scripts/surface-temperature",
+        "caption": "surface temperature modelling",
+        "tags": [
+            "urban heat island (UHI)",
+            "outdoor thermal comfort (OTC)"
+        ],
+        "date": "2021-11"
     },
     {
-      "src": "ViewCapture202402xx_500.jpg",
-      "url": "https://echoes.paris/scripts/point-cloud-ops",
-      "caption": "",
-      "tags": ["point clouds","semantic segmentation","3D scanning"]
+        "src": "shells_form_kagome_00_500.mp4",
+        "url": "https://echoes.paris/scripts/shells-structural-form-finding",
+        "caption": "",
+        "tags": [
+            "gridshell",
+            "form-finding",
+            "timber structures",
+            "timber engineering",
+            "active bending",
+            "lightweight structures"
+        ],
+        "date": "2021-07"
     },
     {
-      "src": "ocean wave shader_500.mp4",
-      "url": "https://echoes.paris/scripts/running-glsl-shaders-in-grasshopper",
-      "caption": "advanced rendering",
-      "tags": ["shaders"]
+        "src": "023_01_500.jpg",
+        "url": "https://echoes.paris/cases/henri-iv-bridge-building",
+        "caption": "reinventing cities",
+        "tags": [
+            "structural design",
+            "architectural design",
+            "crossings"
+        ],
+        "date": "2018-05"
     },
     {
-      "src": "ViewCapture202409xx_500.png",
-      "url": "https://echoes.paris/scripts/parametric-gis",
-      "tags": ["LiDAR", "urban digital model", "digital elevation model (DEM)","digital terrain model (DTM)"]
+        "src": "000_solar massing automata_02_500.jpg",
+        "url": "https://echoes.paris/scripts/urbsolar-massing-automatagh",
+        "caption": "solar massing automata",
+        "tags": [
+            "cellular automata (CA)",
+            "solar design"
+        ],
+        "date": "2015-06"
     },
     {
-      "src": "000_massing indicators_500.gif",
-      "url": "https://echoes.paris/scripts/massing-indicators",
-      "caption": "metrics and indicators",
-      "tags":["master planning","design evaluation","environmental design","environmental engineering"]
+        "src": "bim_pointcloud_500.jpg",
+        "url": "https://echoes.paris/scripts/point-cloud-ops",
+        "caption": "",
+        "tags": [
+            "point clouds",
+            "semantic segmentation",
+            "3D scanning"
+        ],
+        "date": "2024-02"
     },
     {
-      "src": "PT3PF_17b_500.jpg",
-      "url": "https://echoes.paris/scripts/topology-optimization-with-post-tension",
-      "tags": ["topology optimization", "generative AI","crossings"]
+        "src": "ocean wave shader_500.mp4",
+        "url": "https://echoes.paris/scripts/running-glsl-shaders-in-grasshopper",
+        "caption": "advanced rendering",
+        "tags": [
+            "shaders"
+        ],
+        "date": "2019-05"
     },
     {
-      "src": "DVF2019_ValeurFonciere_inf100k€,sup1000m2_500.png",
-      "url": "https://echoes.paris/scripts/dvf",
-      "caption": "",
-      "tags": ["location intelligence","cartography","real-estate"]
+        "src": "urb_lidarHD_500.png",
+        "url": "https://echoes.paris/scripts/parametric-gis",
+        "tags": [
+            "LiDAR",
+            "urban digital model",
+            "digital elevation model (DEM)",
+            "digital terrain model (DTM)"
+        ],
+        "date": "2024-04"
     },
     {
-      "src": "SD_500.gif",
-      "url": "https://echoes.paris/scripts/ai-rendering",
-      "tags": ["diffusion architecture", "generative AI", "rendering"]
+        "src": "ee_massing indicators_500.gif",
+        "url": "https://echoes.paris/scripts/massing-indicators",
+        "caption": "metrics and indicators",
+        "tags": [
+            "master planning",
+            "design evaluation",
+            "environmental design",
+            "environmental engineering"
+        ],
+        "date": "2018-10"
     },
     {
-      "src": "000_vG_500.gif",
-      "url": "https://echoes.paris/scripts/ai-rendering",
-      "tags": ["diffusion architecture", "generative AI", "rendering"]
+        "src": "PT3PF_17b_500.jpg",
+        "url": "https://echoes.paris/scripts/topology-optimization-with-post-tension",
+        "tags": [
+            "topology optimization",
+            "generative AI",
+            "crossings"
+        ],
+        "date": "2019-04"
     },
     {
-      "src": "verdon_500.png",
-      "url": "https://echoes.paris/scripts/land-importer",
-      "caption": "land importer",
-      "tags": ["geographic information systems (GIS)", "satellite imagery"]
+        "src": "DVF2019_ValeurFonciere_inf100k€,sup1000m2_500.png",
+        "url": "https://echoes.paris/scripts/dvf",
+        "caption": "",
+        "tags": [
+            "location intelligence",
+            "cartography",
+            "real-estate"
+        ],
+        "date": "2019-04"
+    },
+    {
+        "src": "SD_500.gif",
+        "url": "https://echoes.paris/scripts/ai-rendering",
+        "tags": [
+            "diffusion architecture",
+            "generative AI",
+            "rendering"
+        ],
+        "date": "2023-07"
+    },
+    {
+        "src": "ds_vG_500.gif",
+        "url": "https://echoes.paris/scripts/ai-rendering",
+        "tags": [
+            "diffusion architecture",
+            "generative AI",
+            "rendering"
+        ],
+        "date": "2024-05"
+    },
+    {
+        "src": "lnd_verdon_500.png",
+        "url": "https://echoes.paris/scripts/land-importer",
+        "caption": "land importer",
+        "tags": [
+            "geographic information systems (GIS)",
+            "satellite imagery"
+        ],
+        "date": "2020-05"
     }
-  ]
+]
