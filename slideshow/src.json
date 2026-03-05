@@ -2,39 +2,43 @@
     {
         "src": "2026-03-03 Dev.png",
         "url": "",
-        "caption": "knowledge graphs for software development",
+        "caption": "R&D: knowledge graphs for coding",
         "tags": [
-            "vibe coding",
             "programming",
-            "don't repeat yourself (DRY)"
+            "agentic AI",
+            "orchestration",
+            "knowledge graphs (KGs)"
         ],
         "date": "2025-12"
     },
     {
         "src": "os_KGs_500.jpg",
         "url": "",
-        "caption": "knowledge graphs for semantic search and information architecture dashboard",
+        "caption": "R&D: knowledge graphs for visual semantic architecture",
         "tags": [
-            "knowledge graphs (KGs)"
+            "knowledge graphs (KGs)",
+            "dashboards",
+            "information architecture (IA)",
+            "ontology",
+            "semantics",
+            "context engineering"
         ],
         "date": "2024-12"
     },
     {
         "src": "090-01_500.jpg",
         "url": "",
-        "caption": "large scale wind analysis",
+        "caption": "NEOM (Saudi Arabia): wind comfort assessment",
         "tags": [
             "computational wind engineering (CWE)",
-            "computational fluid dynamics (CFD)",
-            "outdoor thermal comfort (OTC)",
-            "cloud computing"
+            "computational fluid dynamics (CFD)"
         ],
         "date": "2023-10"
     },
     {
         "src": "h147_02_500.jpg",
         "url": "https://echoes.paris/cases/climate-ribbon",
-        "caption": "performance-driven design",
+        "caption": "Climate Ribbon™ (Miami): performance-driven design",
         "tags": [
             "datascape",
             "solar design",
@@ -46,7 +50,7 @@
     {
         "src": "h100_SP_24_500.png",
         "url": "",
-        "caption": "",
+        "caption": "Louvre, Paris: computational design and daylighting analysis",
         "tags": [
             "complex structures",
             "computational engineering",
@@ -61,7 +65,7 @@
     {
         "src": "086_02_500.gif",
         "url": "",
-        "caption": "computational wind engineering for pedestrian wind comfort analysis",
+        "caption": "Condamine (Monaco): computational wind engineering for pedestrian wind comfort analysis",
         "tags": [
             "pedestrian wind comfort (PWC)",
             "computational wind engineering (CWE)",
@@ -82,7 +86,7 @@
     {
         "src": "080-02_500.jpg",
         "url": "",
-        "caption": "parametric modelling of large-scale structures",
+        "caption": "NEOM (Saudi Arabia): parametric modelling for iterative structural analysis",
         "tags": [
             "parametric modelling",
             "parametric design",
@@ -93,7 +97,7 @@
     {
         "src": "063_05_500.mp4",
         "url": "",
-        "caption": "ekilaya gridshel catalogue",
+        "caption": "Ekilaya (France): gridshell catalogue",
         "tags": [
             "gridshell",
             "form-finding",
@@ -107,7 +111,7 @@
     {
         "src": "090-03_500.jpg",
         "url": "",
-        "caption": "computational landscapes generation",
+        "caption": "NEOM (Saudi Arabia): computational landscapes generation",
         "tags": [
             "landscape"
         ],
@@ -116,7 +120,7 @@
     {
         "src": "033-11_500.jpg",
         "url": "",
-        "caption": "footbridge design in Saudi Arabia",
+        "caption": "(Saudi Arabia): footbridge design",
         "tags": [
             "structural design",
             "ornament",
@@ -128,7 +132,7 @@
     {
         "src": "087-01_500.jpg",
         "url": "",
-        "caption": "vegetal shading systems",
+        "caption": "(France): modular vegetal systems for enhanced urban shading",
         "tags": [
             "urban shading"
         ],
@@ -137,7 +141,7 @@
     {
         "src": "083-01_500.gif",
         "url": "",
-        "caption": "art investigations through 3D scanning and photogrammetry",
+        "caption": "(France): art investigations through 3D scanning and photogrammetry",
         "tags": [
             "art investigations",
             "3D scanning",
@@ -148,7 +152,7 @@
     {
         "src": "080-01_500.gif",
         "url": "",
-        "caption": "structural modelling",
+        "caption": "NEOM (Saudi Arabia): parametric modelling of large-scale structures",
         "tags": [
             "parametric modelling",
             "parametric design",
@@ -159,7 +163,7 @@
     {
         "src": "074_Ambiantal clustering_100_500.png",
         "url": "https://echoes.paris/cases/ctvd",
-        "caption": "ambiances clustering to define scenographic sequences",
+        "caption": "CTVD (Monaco): ambiances clustering and architectural sequences planning",
         "tags": [
             "scenography",
             "cluster analysis",
@@ -171,10 +175,10 @@
     {
         "src": "024_07_500.jpg",
         "url": "https://echoes.paris/cases/al-janoub-stadium",
-        "caption": "design to production",
+        "caption": "Al Janoub Stadium (Qatar): design to production workflow",
         "tags": [
             "building information modeling (BIM)",
-            "parametric detailling",
+            "parametric detailing",
             "digital manufacturing"
         ],
         "date": "2018-06"
@@ -182,7 +186,7 @@
     {
         "src": "urbanytics_001_500px.mp4",
         "url": "https://echoes.paris/scripts/massing-indicators",
-        "caption": "massing indicators",
+        "caption": "R&D: context-aware indicators for neighborhood planning",
         "tags": [
             "3D tiles"
         ],
@@ -191,7 +195,7 @@
     {
         "src": "NVF_dm_03_500.jpg",
         "url": "https://echoes.paris/scripts/view",
-        "caption": "visual access to nature",
+        "caption": "R&D: urban visibility analysis for real-estate valuation",
         "tags": [
             "visibility",
             "Nature View Factor (NVF)"
@@ -201,7 +205,7 @@
     {
         "src": "shells_bioshell_02_500.gif",
         "url": "https://echoes.paris/cases/bioshell",
-        "caption": "hybrid straw bale and timber gridshell",
+        "caption": "R&D: hybrid straw bale and timber gridshell",
         "tags": [
             "low-tech",
             "low-carbon",
@@ -213,7 +217,7 @@
     {
         "src": "Massing Heuristics_04.mp4",
         "url": "https://echoes.paris/posts/typology-aware-generative-masterplanning",
-        "caption": "dynamic urban massing",
+        "caption": "R&D: dynamic urban massing",
         "tags": [
             "procedural modelling",
             "dynamic masterplanning",
@@ -224,7 +228,7 @@
     {
         "src": "080-03_500.jpg",
         "url": "",
-        "caption": "advanced geometries",
+        "caption": "NEOM (Saudi Arabia): computational design for complex geometries generation",
         "tags": [
             "parametric modelling"
         ],
@@ -233,7 +237,7 @@
     {
         "src": "h147_SP_Solar Data Computation _500.mp4",
         "url": "https://echoes.paris/cases/climate-ribbon",
-        "caption": "Climate Ribbon™, Miami. Solar data computation process",
+        "caption": "Climate Ribbon™ (Miami): solar data computation process",
         "tags": [
             "performance-driven design",
             "solar design"
@@ -243,25 +247,29 @@
     {
         "src": "h147_SP_04_500.jpg",
         "url": "https://echoes.paris/cases/climate-ribbon",
-        "caption": "Climate Ribbon™, Miami.",
+        "caption": "Climate Ribbon™ (Miami): shading component design",
         "tags": [
             "parametric design",
             "solar shading systems",
             "non-standard",
-            "component instanciation"
+            "component instantiation"
         ],
         "date": "2014-04"
     },
     {
         "src": "050- VO_500.png",
         "url": "https://echoes.paris/cases/paris-2024-olympic-village",
-        "caption": "Paris 2024 bioclimatic studies",
+        "caption": "Paris 2024 Olympic Village (France): bioclimatic studies",
+        "tags": [
+            "outdoor thermal comfort (OTC)",
+            "massing"
+        ],
         "date": "2019-10"
     },
     {
         "src": "ee_Surface Temperature Analysis_500.gif",
         "url": "https://echoes.paris/scripts/surface-temperature",
-        "caption": "surface temperature modelling",
+        "caption": "ADEME/MESH2C (France): Urban heat island modelling in Rhino/Grasshopper",
         "tags": [
             "urban heat island (UHI)",
             "outdoor thermal comfort (OTC)"
@@ -271,7 +279,7 @@
     {
         "src": "shells_form_kagome_00_500.mp4",
         "url": "https://echoes.paris/scripts/shells-structural-form-finding",
-        "caption": "",
+        "caption": "R&D: structural form-finding of kagome gridshells",
         "tags": [
             "gridshell",
             "form-finding",
@@ -285,7 +293,7 @@
     {
         "src": "023_01_500.jpg",
         "url": "https://echoes.paris/cases/henri-iv-bridge-building",
-        "caption": "reinventing cities",
+        "caption": "Henri IV Bridge (Paris): design for the 'Reinventer Paris' competition",
         "tags": [
             "structural design",
             "architectural design",
@@ -296,7 +304,7 @@
     {
         "src": "000_solar massing automata_02_500.jpg",
         "url": "https://echoes.paris/scripts/urbsolar-massing-automatagh",
-        "caption": "solar massing automata",
+        "caption": "Teaching: algorithmic design and simulation integration",
         "tags": [
             "cellular automata (CA)",
             "solar design"
@@ -306,7 +314,7 @@
     {
         "src": "bim_pointcloud_500.jpg",
         "url": "https://echoes.paris/scripts/point-cloud-ops",
-        "caption": "",
+        "caption": "R&D: point cloud operations for semantic segmentation",
         "tags": [
             "point clouds",
             "semantic segmentation",
@@ -317,7 +325,7 @@
     {
         "src": "ocean wave shader_500.mp4",
         "url": "https://echoes.paris/scripts/running-glsl-shaders-in-grasshopper",
-        "caption": "advanced rendering",
+        "caption": "GPU-acceleration in Rhino/Grasshopper and GLSL shaders",
         "tags": [
             "shaders"
         ],
@@ -326,6 +334,7 @@
     {
         "src": "urb_lidarHD_500.png",
         "url": "https://echoes.paris/scripts/parametric-gis",
+        "caption": "R&D: parametric GIS and LiDAR data integration for urban design",
         "tags": [
             "LiDAR",
             "urban digital model",
@@ -337,7 +346,7 @@
     {
         "src": "ee_massing indicators_500.gif",
         "url": "https://echoes.paris/scripts/massing-indicators",
-        "caption": "metrics and indicators",
+        "caption": "automated environmental metrics computation for masterplanning",
         "tags": [
             "master planning",
             "design evaluation",
@@ -349,6 +358,7 @@
     {
         "src": "PT3PF_17b_500.jpg",
         "url": "https://echoes.paris/scripts/topology-optimization-with-post-tension",
+        "caption": "R&D: topology optimization with post-tensioning",
         "tags": [
             "topology optimization",
             "generative AI",
@@ -359,10 +369,13 @@
     {
         "src": "DVF2019_ValeurFonciere_inf100k€,sup1000m2_500.png",
         "url": "https://echoes.paris/scripts/dvf",
-        "caption": "",
+        "caption": "R&D: location intelligence",
         "tags": [
             "location intelligence",
+            "point of interest (POI)",
             "cartography",
+            "data visualization",
+            "data mapping",
             "real-estate"
         ],
         "date": "2019-04"
@@ -370,6 +383,7 @@
     {
         "src": "SD_500.gif",
         "url": "https://echoes.paris/scripts/ai-rendering",
+        "caption": "R&D: AI-assisted rendering",
         "tags": [
             "diffusion architecture",
             "generative AI",
@@ -380,6 +394,7 @@
     {
         "src": "ds_vG_500.gif",
         "url": "https://echoes.paris/scripts/ai-rendering",
+        "caption": "R&D: AI-assisted rendering",
         "tags": [
             "diffusion architecture",
             "generative AI",
@@ -390,7 +405,7 @@
     {
         "src": "lnd_verdon_500.png",
         "url": "https://echoes.paris/scripts/land-importer",
-        "caption": "land importer",
+        "caption": "one-click terrain model in Rhino/Grasshopper from satellite & GIS data",
         "tags": [
             "geographic information systems (GIS)",
             "satellite imagery"
