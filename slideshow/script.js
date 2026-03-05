@@ -14,9 +14,9 @@ function shuffleArray(array) {
 async function getMediaFiles() {
     try {
         console.log('Starting getMediaFiles...');
-        const response = await fetch('media.json');
+        const response = await fetch('src.json');
         const mediaFiles = await response.json();
-        console.log(`Loaded ${mediaFiles.length} files from media.json`);
+        console.log(`Loaded ${mediaFiles.length} files from src.json`);
 
         // Process files to add source path
         const processedFiles = mediaFiles.map(file => ({

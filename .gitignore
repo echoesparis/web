@@ -1,0 +1,7 @@
+.playwright-mcp/
+.gitnexus
+.claude/
+slideshow/.claude/settings.local.json
+slideshow/CLAUDE.md
+slideshow/src_candidates/
+slideshow/src_candidates.json
