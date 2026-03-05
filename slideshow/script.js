@@ -291,6 +291,7 @@ async function initSwiper() {
                 el: '.swiper-pagination',
                 clickable: true,
                 dynamicBullets: true,
+                dynamicMainBullets: 5,
             },
             keyboard: {
                 enabled: true,
