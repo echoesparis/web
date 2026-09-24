@@ -1,10 +1,52 @@
-/* CSS Variables for theming */
+/* Gallery styles, shared by ?view=slideshow (default) and ?view=cards. */
+/* Theme: ?theme=light|dark (js/boot.js sets <html data-theme>). With no
+   parameter the :root values below apply, which are the original colours: the
+   page does NOT follow prefers-color-scheme. The background always stays
+   transparent so the host page shows through the iframe. */
 :root {
-    --text-color: currentColor;
-    --bg-color: transparent;
-    --accent-color: currentColor;
+    --text: currentColor;
+    --text-muted: #666;
+    --bg: transparent;
+    --accent: currentColor;
+    --track: rgba(255, 255, 255, 0.2);
+    --placeholder-bg: rgba(0, 0, 0, 0.1);
+    --badge-bg: rgba(255, 255, 255, 0.7);
+    --badge-fg: inherit;
+    --badge-hover: #ffffb3ba;
+    --glow: #ffffb369;
+    --glow-strong: #ffd700;
     --shadow-color: hsla(0, 0%, var(--l, 0%), 0.2);
     --hover-glow: hsla(60, 100%, var(--l, 70%), 0.4);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+    --text: #222;
+    --text-muted: #666;
+    --track: rgba(0, 0, 0, 0.1);
+    --placeholder-bg: rgba(0, 0, 0, 0.1);
+    --badge-bg: rgba(255, 255, 255, 0.7);
+    --badge-fg: #222;
+    --badge-hover: rgba(224, 180, 0, 0.6);
+    --glow: rgba(224, 180, 0, 0.6);
+    --glow-strong: #e0b400;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --hover-glow: rgba(224, 180, 0, 0.6);
+}
+
+:root[data-theme="dark"] {
+    color-scheme: dark;
+    --text: #ddd;
+    --text-muted: #999;
+    --track: rgba(255, 255, 255, 0.2);
+    --placeholder-bg: rgba(255, 255, 255, 0.2);
+    --badge-bg: rgba(0, 0, 0, 0.5);
+    --badge-fg: #eee;
+    --badge-hover: #ffffb3ba;
+    --glow: #ffffb369;
+    --glow-strong: #ffd700;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    --hover-glow: hsla(60, 100%, 70%, 0.4);
 }
 
 /* Base styles */
@@ -13,8 +55,8 @@ html, body {
     padding: 0;
     height: 100%;
     font-family: monospace;
-    background: var(--bg-color);
-    color: var(--text-color);
+    background: var(--bg);
+    color: var(--text);
 }
 
 body.embedded {
@@ -76,7 +118,7 @@ body.embedded {
 }
 
 .swiper-pagination-bullet {
-    background: #666;
+    background: var(--text-muted);
     opacity: 0.5;
     cursor: pointer;
     transition: opacity 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
@@ -86,7 +128,7 @@ body.embedded {
 
 .swiper-pagination-bullet-active {
     opacity: 1;
-    background: #ffffb369;
+    background: var(--glow);
 }
 
 .swiper-pagination-bullet:hover {
@@ -108,7 +150,7 @@ body.embedded {
     pointer-events: none;
     opacity: 0;
     transition: opacity 0.2s ease;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.6);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
     z-index: 9999;
     background: #111;
 }
@@ -143,7 +185,7 @@ body.embedded {
 .slide-caption {
     position: relative;
     text-align: center;
-    color: #666;
+    color: var(--text-muted);
     font-size: 14px;
     font-family: monospace;
     padding: 5px;
@@ -231,14 +273,14 @@ body.embedded {
 .loader-spinner {
     width: 50px;
     height: 50px;
-    border: 3px solid #666;
+    border: 3px solid var(--text-muted);
     border-radius: 50%;
-    border-top-color: #666;
+    border-top-color: var(--text-muted);
     animation: spin 1s linear infinite;
 }
 
 .loader-text {
-    color: #666;
+    color: var(--text-muted);
     margin-top: 10px;
     font-family: monospace;
 }
@@ -261,14 +303,14 @@ body.embedded {
 .loading-progress-bar {
     width: 100%;
     height: 4px;
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--track);
     border-radius: 2px;
     overflow: hidden;
 }
 
 .loading-progress {
     height: 100%;
-    background: linear-gradient(90deg, #ffffb369, #ffd700);
+    background: linear-gradient(90deg, var(--glow), var(--glow-strong));
     border-radius: 2px;
     transition: width 0.3s ease;
     width: 0%;
@@ -280,14 +322,14 @@ body.embedded {
     justify-content: center;
     align-items: center;
     height: 200px;
-    background: rgba(0, 0, 0, 0.1);
+    background: var(--placeholder-bg);
     border-radius: 8px;
-    border: 2px dashed #666;
+    border: 2px dashed var(--text-muted);
 }
 
 .video-placeholder {
     text-align: center;
-    color: #666;
+    color: var(--text-muted);
 }
 
 .video-icon {
@@ -300,7 +342,7 @@ body.embedded {
     display: inline-block;
     margin-top: 10px;
     padding: 8px 16px;
-    background: #ffffb369;
+    background: var(--glow);
     color: #333;
     text-decoration: none;
     border-radius: 4px;
@@ -308,7 +350,7 @@ body.embedded {
 }
 
 .video-download:hover {
-    background: #ffd700;
+    background: var(--glow-strong);
 }
 
 /* Improved slide placeholder */
@@ -318,16 +360,16 @@ body.embedded {
     justify-content: center;
     align-items: center;
     height: 100%;
-    color: #666;
+    color: var(--text-muted);
     font-family: monospace;
 }
 
 .loading-spinner {
     width: 20px;
     height: 20px;
-    border: 2px solid #666;
+    border: 2px solid var(--text-muted);
     border-radius: 50%;
-    border-top-color: #ffffb369;
+    border-top-color: var(--glow);
     animation: spin 1s linear infinite;
     margin-bottom: 10px;
 }
@@ -342,7 +384,7 @@ body.embedded {
 .swiper-slide a:hover video {
     transform: scale(1.02); /* Subtle zoom on hover */
     /* Combine both shadows */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px #ffffb369; /* Base shadow + glow effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow); /* Base shadow + glow effect */
 }
 
 
@@ -356,7 +398,8 @@ body.embedded {
     position: absolute;
     top: 5px;
     right: 5px;
-    background: rgba(255, 255, 255, 0.7);
+    background: var(--badge-bg);
+    color: var(--badge-fg);
     padding: 5px 8px;
     border-radius: 0 8px 0 8px;
     font-size: 14px;
@@ -367,7 +410,7 @@ body.embedded {
 
 .swiper-slide a:hover::after {
     opacity: 1;
-    background: #ffffb3ba;
+    background: var(--badge-hover);
 }
 
 /* Add this new rule to hide the arrow on caption links */
@@ -376,7 +419,7 @@ body.embedded {
 }
 
 .error-message {
-    color: #666;
+    color: var(--text-muted);
     text-align: center;
     padding: 20px;
 }
@@ -412,7 +455,7 @@ body.embedded {
     }
     
     .slide-caption {
-        font-size: 12px;
+        font-size: 11px;
         padding: 3px;
     }
     
@@ -421,3 +464,154 @@ body.embedded {
     }
 }
 
+
+/* ==========================================================================
+   ?view=cards — three.js card ring. Everything above is shared; captions,
+   tags, loader and theming are the same classes in both views.
+   ========================================================================== */
+
+body.view-cards .container {
+    position: relative;
+    width: 100%;
+    display: block;
+}
+
+body.view-cards .slide-caption {
+    padding-bottom: 5px;
+}
+
+body.view-cards .loader {
+    transition: opacity 0.4s ease;
+}
+
+#cards-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;       /* we handle drag ourselves */
+    cursor: grab;
+    opacity: 0;
+    transition: opacity 1.2s ease;
+}
+
+#cards-canvas.ready {
+    opacity: 1;
+}
+
+#cards-canvas.dragging {
+    cursor: grabbing;
+}
+
+#cards-canvas.pointing {
+    cursor: pointer;
+}
+
+/* Arc labels — the no-troika stand-in for the demo's billboarded Text.
+   Positioned every frame from the projected arc midpoint. */
+#arc-labels {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.arc-label {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    white-space: nowrap;
+    transition: opacity 0.3s ease;
+}
+
+/* Centre preview */
+#preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 5;
+}
+
+#preview.visible {
+    opacity: 1;
+}
+
+/* Media sits in the middle of the ring. */
+#preview .slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* The ring's centre projects slightly above the viewport centre. */
+    transform: translate(-50%, -54%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 90%;
+}
+
+/* Sized to sit inside the ring rather than cover it — the upstream preview
+   card is about a third of the ring's diameter. */
+#preview img,
+#preview video {
+    max-height: 40vh;
+    max-width: 44vw;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Caption sits below the ring, in the empty band above the hint. Tags stay
+   clickable even though the rest of the preview is inert. */
+#preview .slide-caption {
+    position: absolute;
+    bottom: 38px;
+    left: 0;
+    width: 100%;
+    pointer-events: auto;
+}
+
+/* Clickable indicator, mirroring the slideshow's ↗ badge */
+#preview .slide-content.has-link img,
+#preview .slide-content.has-link video {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 20px var(--glow);
+}
+
+.hint {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-family: monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 3;
+    transition: opacity 0.5s ease;
+}
+
+.hint.hidden {
+    opacity: 0;
+}
+
+@media (max-width: 768px) {
+    #preview img,
+    #preview video {
+        max-height: 32vh;
+        max-width: 72vw;
+    }
+
+    .arc-label {
+        font-size: 11px;
+    }
+}

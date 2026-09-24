@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Sébastien Perrault">
+    <title>Media Cards</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- three.js (minor-pinned: every 0.x minor of three is a breaking change) -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+<body class="embedded">
+    <div class="container">
+        <canvas id="cards-canvas"></canvas>
+
+        <!-- Arc labels are positioned each frame by projecting their arc midpoint -->
+        <div id="arc-labels"></div>
+
+        <!-- Centre preview, shown while a card is hovered -->
+        <div id="preview"></div>
+
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Loading cards...</div>
+            <div class="loading-progress-container">
+                <div class="loading-progress-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hint">scroll or drag to spin &middot; hover a card</div>
+    </div>
+
+    <script type="module" src="../js/cards.js"></script>
+</body>
+</html>

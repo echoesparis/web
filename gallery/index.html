@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Sébastien Perrault">
+    <title>Media Gallery</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+
+    <!-- three.js for ?view=cards (minor-pinned: every 0.x minor of three is a breaking change).
+         An importmap only maps a URL, so it costs nothing in the slideshow view. -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.186/build/three.module.js"
+        }
+    }
+    </script>
+</head>
+<body class="embedded">
+    <!-- One page, two views: js/boot.js mounts the template named by ?view= -->
+    <div class="container">
+        <div class="loader">
+            <div class="loader-spinner"></div>
+            <div class="loader-text">Loading...</div>
+            <div class="loading-progress-container">
+                <div class="loading-progress-bar">
+                    <div class="loading-progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <template id="view-slideshow">
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <!-- Images and videos are loaded dynamically by js/slideshow.js -->
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </template>
+
+    <template id="view-cards">
+        <canvas id="cards-canvas"></canvas>
+        <!-- Arc labels are positioned each frame by projecting their arc midpoint -->
+        <div id="arc-labels"></div>
+        <!-- Centre preview, shown while a card is hovered -->
+        <div id="preview"></div>
+        <div class="hint">scroll or drag to spin &middot; hover a card</div>
+    </template>
+
+    <script type="module" src="js/boot.js"></script>
+</body>
+</html>

@@ -1,3 +1,5 @@
+import { loadMedia, getMediaType, SRC_DIR, LOAD_TIMEOUT } from './media.js';
+
 document.addEventListener('click', function() {
     document.documentElement.setAttribute('data-user-interacted', 'true');
 }, { once: true });
@@ -14,15 +16,8 @@ function shuffleArray(array) {
 async function getMediaFiles() {
     try {
         console.log('Starting getMediaFiles...');
-        const response = await fetch('src.json');
-        const mediaFiles = await response.json();
-        console.log(`Loaded ${mediaFiles.length} files from src.json`);
-
-        // Process files to add source path
-        const processedFiles = mediaFiles.map(file => ({
-            ...file,
-            src: `src/${file.src}` // Prepend the src/ folder path
-        }));
+        const processedFiles = await loadMedia();
+        console.log(`Loaded ${processedFiles.length} files from src.json`);
 
         // Shuffle the array
         return shuffleArray(processedFiles);
@@ -45,11 +40,6 @@ function getFileName(path) {
         }
     }
     return path.split('/').pop().replace(/\.[^/.]+$/, '').trim();
-}
-
-function getMediaType(src) {
-    const ext = src.split('.').pop().toLowerCase();
-    return ext === 'mp4' ? 'video' : 'image';
 }
 
 async function createSlideElement(media) {
@@ -192,7 +182,7 @@ async function loadSlide(index, swiperWrapper) {
 
             // Add timeout for loading indicator
             const timeoutPromise = new Promise((_, reject) => {
-                setTimeout(() => reject(new Error('Loading timeout')), 10000);
+                setTimeout(() => reject(new Error('Loading timeout')), LOAD_TIMEOUT);
             });
 
             // Race between loading and timeout
@@ -497,7 +487,7 @@ async function initSwiper() {
         const slideParam = params.get('slide');
         if (slideParam) {
             const targetIdx = mediaFiles.findIndex(m =>
-                m.src.replace('src/', '') === slideParam ||
+                m.src.replace(SRC_DIR, '') === slideParam ||
                 (m.caption && m.caption.toLowerCase() === slideParam.toLowerCase())
             );
             if (targetIdx >= 0) {
@@ -556,7 +546,8 @@ function logPerformanceMetrics() {
 }
 
 // Initialize when the page loads
-document.addEventListener('DOMContentLoaded', initSwiper);
+// boot.js mounts the markup before importing this module, so start now.
+initSwiper();
 
 // Add event listeners
 document.addEventListener('keydown', handleKeyboardShortcuts);
