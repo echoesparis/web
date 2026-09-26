@@ -1,0 +1,82 @@
+/* ============================================
+   Climate Ribbon — presentation-specific styles
+   ============================================ */
+
+:root {
+  --accent: #2563eb;
+  --accent-light: #93c5fd;
+  --navy: #00008b;
+}
+
+/* --- Section title slides --- */
+.reveal .slides section.section-title-slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.reveal .slides section.section-title-slide h2 {
+  font-size: 2.8em;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-shadow: none;
+  border-bottom: 4px solid var(--accent);
+  padding-bottom: 0.3em;
+}
+
+/* Down arrow hint */
+.reveal .slides section.section-title-slide::after {
+  content: "\25BC";
+  display: block;
+  margin-top: 2em;
+  font-size: 0.8em;
+  color: var(--accent-light);
+  animation: cr-bounce 2s infinite;
+}
+
+@keyframes cr-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
+/* --- Slide number --- */
+.reveal .slide-number {
+  display: block !important;
+  font-size: 14px;
+  color: var(--navy);
+  background: rgba(255, 255, 255, 0.8);
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* --- Navy text --- */
+.c-navy { color: var(--navy); }
+
+/* --- External link icons on title slide --- */
+.reveal .slides section a > img[src*=".svg"] {
+  max-height: 28px !important;
+  max-width: 28px !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 6px;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.reveal .slides section a:hover > img[src*=".svg"] {
+  opacity: 1;
+}
+
+/* --- Photo slides (dark background) --- */
+.reveal .slides section.photo-slide {
+  background: #000;
+}
+
+.reveal .slides section.photo-slide p {
+  color: #ccc;
+  font-size: 0.7em;
+}

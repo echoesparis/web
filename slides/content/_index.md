@@ -3,10 +3,10 @@ title = "Slides"
 outputs = ["Reveal"]
 +++
 
-# WIP
+# ECHOES.PARIS
 
 * [Computational Design (CD)](#/cd)
-* [Gesospatial Modellign](#/gis)
+* [Gesospatial Modelling](#/gis)
 * [AI](#/ai)
 
 ---
@@ -21,6 +21,7 @@ outputs = ["Reveal"]
 * [<i class="ms ms-txt"></i> Parametric Design (PD)]()
 * [<i class="ms ms-txt"></i> Computational Design (CD)]()
 * [<i class="ms ms-txt"></i> Generative Design (GD)]()
+* [<i class="ms ms-txt"></i> Climate Ribbon](/slides/climate-ribbon/)
 
 ---
 
