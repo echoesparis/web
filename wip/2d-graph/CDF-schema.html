@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teamspace cdf — Schema Graph</title>
+<style>
+    html, body { margin: 0; padding: 0; }
+    #mynetwork {
+        width: 100%;
+        height: 100vh;
+        background-color: #121212;
+    }
+    div.popup {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+        max-width: 320px;
+        background-color: #f5f4ed;
+        border-radius: 3px;
+        border: 1px solid #808074;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+        padding: 6px 10px;
+        font: 13px/1.5 sans-serif;
+    }
+    .vis-tooltip { display: none; }
+</style>
+</head>
+<body>
+    <div id="mynetwork"></div>
+
+    <!-- vis-network library (CDN) -->
+    <script src="https://unpkg.com/vis-network@latest/standalone/umd/vis-network.min.js"></script>
+
+    <script>
+    (function() {
+        'use strict';
+
+        // ---- Data: cdf teamspace schema graph, fetched from Notion databases/data sources ----
+        // Nodes = databases. Edges = relation properties between databases.
+        // Node/edge text reproduces only what Notion returns: property names/types,
+        // relation targets, and property `description` values (e.g. schema.org tags, "public").
+        var graphData = {
+            nodes: [
+                {
+                    id: "personnes", label: "Personnes", shape: "image",
+                    image: "https://www.notion.so/icons/card_gray.svg",
+                    size: 34, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Personnes</b><br/>" +
+                        "Name (title), Description (text), Liens (text), Statut (multi_select), " +
+                        "Person (person), Place (place), Last edited time (last_edited_time)<br/>" +
+                        "Organisations (relation → Organisations) — schema:affiliation<br/>" +
+                        "Groupes (relation)<br/>" +
+                        "Publications (relation → Publications)<br/>" +
+                        "Projets (relation → Projets)<br/>" +
+                        ". (relation) — schema:sameAs<br/>" +
+                        ".o (rollup on .), .i (rollup on .), .e (rollup on .)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d4f3868d02e80e388ebef9936bd529d\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "organisations", label: "Organisations", shape: "image",
+                    image: "https://www.notion.so/icons/hexagon-alternate_gray.svg",
+                    size: 26, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Organisations</b><br/>" +
+                        "Name (title), Description (text), Liens (text), Type (multi_select)<br/>" +
+                        "Membres (relation → Personnes) — schema:member<br/>" +
+                        "Projets (relation → Projets)<br/>" +
+                        ". (relation) — schema:sameAs<br/>" +
+                        "Rollup (rollup on .)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d4f3868d02e80fca17bf6db0d0dcd6b\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "groupes", label: "Groupes", shape: "image",
+                    image: "https://www.notion.so/icons/git_gray.svg",
+                    size: 20, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Groupes</b><br/>" +
+                        "Name (title), Description (text), Person (person), github (url), URL (url)<br/>" +
+                        "Lexique (relation → Lexique)<br/>" +
+                        ". (relation)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d8f3868d02e80dfaf34cb6b2778f8ed\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "feuille_de_route", label: "Feuille de route", shape: "image",
+                    image: "https://www.notion.so/icons/checkmark_gray.svg",
+                    size: 20, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Feuille de route</b><br/>" +
+                        "Task name (title) — public<br/>" +
+                        "Description (text) — public<br/>" +
+                        "Status (status) — public<br/>" +
+                        "Priority (select), Effort level (select), Task type (multi_select), " +
+                        "Due date (date), Assignee (person)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d4f3868d02e809fbb47e6529d834e52\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "agenda", label: "Agenda", shape: "image",
+                    image: "https://www.notion.so/icons/calendar_gray.svg",
+                    size: 18, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Agenda</b><br/>" +
+                        "Name (title), Status (status), Date (date), Assign (person)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d4f3868d02e802c9b32e34c8880397f\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "documentation", label: "Documentation", shape: "image",
+                    image: "https://www.notion.so/icons/clipping_gray.svg",
+                    size: 18, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Documentation</b><br/>" +
+                        "Name (title), type (select), date (date), auteur (person)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d4f3868d02e8029a1d5e80e74eec424\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "outils", label: "Outils", shape: "image",
+                    image: "https://www.notion.so/icons/gear_gray.svg",
+                    size: 16, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Outils</b><br/>" +
+                        "Name (title), Description (text), URL (url)<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d8f3868d02e802ba48ee6735020b42a\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "publications", label: "Publications", shape: "image",
+                    image: "https://www.notion.so/icons/compose_gray.svg",
+                    size: 20, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Publications</b><br/>" +
+                        "Name (title) — public<br/>" +
+                        "Date (date) — public<br/>" +
+                        "Status (status), Type (multi_select)<br/>" +
+                        "Auteur (person) — schema:author<br/>" +
+                        "Personnes (relation → Personnes) — schema:author, public<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d7f3868d02e8023bbcbc188256c4ab1\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "projets", label: "Projets", shape: "image",
+                    image: "https://www.notion.so/icons/square-alternate_gray.svg",
+                    size: 20, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Projets</b><br/>" +
+                        "Name (title), Place (place)<br/>" +
+                        "Personnes (relation → Personnes)<br/>" +
+                        "Organisations (relation → Organisations)<br/>" +
+                        ". (relation) — schema:sameAs<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d8f3868d02e8003b184cd1d0a6bf8b0\">ouvrir dans Notion</a>"
+                },
+                {
+                    id: "lexique", label: "Lexique", shape: "image",
+                    image: "https://www.notion.so/icons/tag_gray.svg",
+                    size: 16, color: "#cccccc", font: { color: "#cccccc" },
+                    title: "<b>Lexique</b><br/>" +
+                        "Name (title), Description (text)<br/>" +
+                        "Groupes (relation → Groupes)<br/>" +
+                        ". (relation) — schema:sameAs<br/>" +
+                        "<a href=\"https://app.notion.com/p/3d8f3868d02e8059a6ffcebba67b84a1\">ouvrir dans Notion</a>"
+                }
+            ],
+            edges: [
+                { from: "personnes", to: "organisations", label: "Organisations / Membres",
+                  title: "schema:affiliation / schema:member",
+                  color: { color: "#cccccc" }, font: { color: "#cccccc", strokeWidth: 0 } },
+                { from: "personnes", to: "publications", label: "Publications / Personnes",
+                  title: "schema:author · public",
+                  color: { color: "#cccccc" }, font: { color: "#cccccc", strokeWidth: 0 } },
+                { from: "personnes", to: "projets", label: "Projets / Personnes",
+                  color: { color: "#cccccc" }, font: { color: "#cccccc", strokeWidth: 0 } },
+                { from: "organisations", to: "projets", label: "Projets / Organisations",
+                  color: { color: "#cccccc" }, font: { color: "#cccccc", strokeWidth: 0 } },
+                { from: "groupes", to: "lexique", label: "Lexique / Groupes",
+                  color: { color: "#cccccc" }, font: { color: "#cccccc", strokeWidth: 0 } }
+            ]
+        };
+
+        // ---- vis-network config ----
+        var options = {
+            edges: {
+                color: { inherit: false },
+                font: { align: "top", size: 12 },
+                arrows: { to: { enabled: true, scaleFactor: 0.6 } },
+                smooth: { enabled: true, type: "dynamic" }
+            },
+            interaction: { dragNodes: true, hideEdgesOnDrag: false, hideNodesOnDrag: false },
+            physics: {
+                enabled: true,
+                solver: "repulsion",
+                repulsion: { centralGravity: 0.2, damping: 0.09, nodeDistance: 260, springConstant: 0.05, springLength: 260 },
+                stabilization: { enabled: true, fit: true, iterations: 200, onlyDynamicEdges: false, updateInterval: 50 }
+            }
+        };
+
+        // ---- init ----
+        var container = document.getElementById('mynetwork');
+        var nodes = new vis.DataSet(graphData.nodes);
+        var edges = new vis.DataSet(graphData.edges);
+        var nodeColors = {};
+        nodes.forEach(function(n) { nodeColors[n.id] = n.color; });
+
+        var network = new vis.Network(container, { nodes: nodes, edges: edges }, options);
+
+        // popup on hover
+        var popup = document.createElement("div");
+        popup.className = 'popup';
+        var popupTimeout = null;
+        popup.addEventListener('mouseover', function () {
+            if (popupTimeout !== null) { clearTimeout(popupTimeout); popupTimeout = null; }
+        });
+        popup.addEventListener('mouseout', function () {
+            if (popupTimeout === null) { popupTimeout = setTimeout(function () { popup.style.display = 'none'; }, 500); }
+        });
+        container.appendChild(popup);
+
+        network.on("showPopup", function (nodeId) {
+            var nodeData = nodes.get(nodeId);
+            if (!nodeData || !nodeData.title) { return; }
+            popup.innerHTML = nodeData.title;
+            var posCanvas = network.getPositions([nodeId])[nodeId];
+            var boundingBox = network.getBoundingBox(nodeId);
+            posCanvas.x += 0.5 * (boundingBox.right - boundingBox.left);
+            var posDOM = network.canvasToDOM(posCanvas);
+            posDOM.x += 10;
+            posDOM.y -= 20;
+            popup.style.display = 'block';
+            popup.style.top = posDOM.y + 'px';
+            popup.style.left = posDOM.x + 'px';
+        });
+        network.on("hidePopup", function () {
+            popupTimeout = setTimeout(function () { popup.style.display = 'none'; }, 500);
+        });
+
+        // neighborhood highlighting on select/deselect
+        var highlightActive = false;
+        function neighbourhoodHighlight(params) {
+            var allNodes = nodes.get({ returnType: "Object" });
+            if (params.nodes.length > 0) {
+                highlightActive = true;
+                var selectedNode = params.nodes[0];
+                var connectedNodes = network.getConnectedNodes(selectedNode);
+                var secondDegree = [];
+                for (var j = 0; j < connectedNodes.length; j++) {
+                    secondDegree = secondDegree.concat(network.getConnectedNodes(connectedNodes[j]));
+                }
+                for (var nodeId in allNodes) {
+                    allNodes[nodeId].color = "rgba(200,200,200,0.4)";
+                }
+                for (var i = 0; i < secondDegree.length; i++) {
+                    allNodes[secondDegree[i]].color = "rgba(150,150,150,0.7)";
+                }
+                for (i = 0; i < connectedNodes.length; i++) {
+                    allNodes[connectedNodes[i]].color = nodeColors[connectedNodes[i]];
+                }
+                allNodes[selectedNode].color = nodeColors[selectedNode];
+            } else if (highlightActive) {
+                for (var id in allNodes) { allNodes[id].color = nodeColors[id]; }
+                highlightActive = false;
+            }
+            var updateArray = [];
+            for (var k in allNodes) { updateArray.push(allNodes[k]); }
+            nodes.update(updateArray);
+        }
+        network.on("selectNode", neighbourhoodHighlight);
+        network.on("deselectNode", function () { neighbourhoodHighlight({ nodes: [] }); });
+    })();
+    </script>
+</body>
+</html>
